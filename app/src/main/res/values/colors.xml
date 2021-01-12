@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="renda_fixa">#6987D5</color>
+    <color name="fundos">#445BC1</color>
+    <color name="renda_variavel">#2C43B8</color>
+    <color name="previdencia_privada">#1727AE</color>
 </resources>

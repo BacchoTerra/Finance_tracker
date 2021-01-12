@@ -4,15 +4,243 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F3F3"
     tools:context=".view.MainActivity">
 
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_renda_fixa"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/options_card_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="@dimen/options_card_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/renda_fixa_circleView"
+                android:layout_width="@dimen/circle_view_height_width"
+                android:layout_height="@dimen/circle_view_height_width"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_circular_view"
+                android:backgroundTint="@color/renda_fixa"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_renda_fixa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/renda_fixa"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/renda_fixa_circleView"
+                app:layout_constraintTop_toTopOf="@+id/renda_fixa_circleView" />
+
+            <TextView
+                android:id="@+id/txt_desc_renda_fixa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/produtos_de_cdb"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_renda_fixa"
+                app:layout_constraintTop_toBottomOf="@+id/txt_renda_fixa" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_fundos"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/options_card_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="@dimen/options_card_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_renda_fixa">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/fundos_circleView"
+                android:layout_width="@dimen/circle_view_height_width"
+                android:layout_height="@dimen/circle_view_height_width"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_circular_view"
+                android:backgroundTint="@color/fundos"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_fundos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/fundos"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/fundos_circleView"
+                app:layout_constraintTop_toTopOf="@+id/fundos_circleView" />
+
+            <TextView
+                android:id="@+id/txt_desc_fundos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/fundos_de_a_es_renda_fixa_multimercados_e_outros"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_fundos"
+                app:layout_constraintTop_toBottomOf="@+id/txt_fundos" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_renda_variavel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/options_card_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="@dimen/options_card_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_fundos">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/renda_variavel_circleView"
+                android:layout_width="@dimen/circle_view_height_width"
+                android:layout_height="@dimen/circle_view_height_width"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_circular_view"
+                android:backgroundTint="@color/renda_variavel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_renda_variavel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/renda_vari_vel"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/renda_variavel_circleView"
+                app:layout_constraintTop_toTopOf="@+id/renda_variavel_circleView" />
+
+            <TextView
+                android:id="@+id/txt_desc_renda_variavel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/a_es_b3_bolsa_de_valores"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_renda_variavel"
+                app:layout_constraintTop_toBottomOf="@+id/txt_renda_variavel" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_renda_previdencia"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/options_card_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="@dimen/options_card_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_renda_variavel">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/previdencia_circleView"
+                android:layout_width="@dimen/circle_view_height_width"
+                android:layout_height="@dimen/circle_view_height_width"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_circular_view"
+                android:backgroundTint="@color/renda_variavel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_previdencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/previd_ncia_privada"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/previdencia_circleView"
+                app:layout_constraintTop_toTopOf="@+id/previdencia_circleView" />
+
+            <TextView
+                android:id="@+id/txt_desc_previdencia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/planos_vgbl_e_pgbl"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_previdencia"
+                app:layout_constraintTop_toBottomOf="@+id/txt_previdencia" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginBottom="32dp"
+        android:text="Alpha version"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

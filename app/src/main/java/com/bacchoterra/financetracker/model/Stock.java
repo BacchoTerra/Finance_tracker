@@ -35,6 +35,9 @@ public class Stock {
         this.graphsUsed = graphsUsed;
     }
 
+    public Stock() {
+    }
+
     public String getStockName() {
         return stockName;
     }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Finance tracker</string>
+    <string name="renda_fixa">Renda fixa</string>
+    <string name="produtos_de_cdb">Produtos de CDB</string>
+    <string name="fundos">Fundos</string>
+    <string name="fundos_de_a_es_renda_fixa_multimercados_e_outros">Fundos de ações, renda fixa, multimercados e outros</string>
+    <string name="renda_vari_vel">Renda variável</string>
+    <string name="a_es_b3_bolsa_de_valores">Ações - B3 (Bolsa de valores)</string>
+    <string name="planos_vgbl_e_pgbl">Planos VGBL e PGBL</string>
+    <string name="previd_ncia_privada">Previdência privada</string>
 </resources>

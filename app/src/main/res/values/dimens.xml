@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="options_card_height">83dp</dimen>
+    <dimen name="options_card_radius">9dp</dimen>
+    <dimen name="circle_view_height_width">48dp</dimen>
+
+
+
+</resources>
