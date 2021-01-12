@@ -1,8 +1,10 @@
-package com.bacchoterra.financetracker;
+package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.bacchoterra.financetracker.R;
 
 public class MainActivity extends AppCompatActivity {
 
