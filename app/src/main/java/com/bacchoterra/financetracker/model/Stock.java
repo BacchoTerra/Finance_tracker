@@ -3,8 +3,8 @@ package com.bacchoterra.financetracker.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "renda_variavel_table")
-public class RendaVariavel {
+@Entity(tableName = "stock_table")
+public class Stock {
 
     private String stockName; //mandatory
     private long initialTimestamp; //mandatory
@@ -20,7 +20,7 @@ public class RendaVariavel {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    public RendaVariavel(String stockName, long initialTimestamp, long finalTimestamp, float initialPrice, int quantity, float totalSpent, int id, String expectedTimeInvested, boolean isFinished, float profit, String techniqueUsed, String graphsUsed) {
+    public Stock(String stockName, long initialTimestamp, long finalTimestamp, float initialPrice, int quantity, float totalSpent, int id, String expectedTimeInvested, boolean isFinished, float profit, String techniqueUsed, String graphsUsed) {
         this.stockName = stockName;
         this.initialTimestamp = initialTimestamp;
         this.finalTimestamp = finalTimestamp;

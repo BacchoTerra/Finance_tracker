@@ -7,14 +7,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.bacchoterra.financetracker.dao.RendaVariavelDao;
-import com.bacchoterra.financetracker.model.RendaVariavel;
+import com.bacchoterra.financetracker.dao.StockDao;
+import com.bacchoterra.financetracker.model.Stock;
 
-@Database(entities = {RendaVariavel.class},version = 1)
+@Database(entities = {Stock.class},version = 1)
 public abstract class MyDatabase extends RoomDatabase {
 
     private static MyDatabase instance;
-    public abstract RendaVariavelDao getRendaVariavelDao();
+    public abstract StockDao getRendaVariavelDao();
 
     public synchronized static MyDatabase getInstance(Context c){
 
