@@ -16,7 +16,7 @@ public abstract class MyDatabase extends RoomDatabase {
     private static MyDatabase instance;
     public abstract RendaVariavelDao getRendaVariavelDao();
 
-    public synchronized MyDatabase getInstance(Context c){
+    public synchronized static MyDatabase getInstance(Context c){
 
         if (instance == null){
 
