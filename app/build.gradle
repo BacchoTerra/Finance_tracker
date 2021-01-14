@@ -56,4 +56,7 @@ dependencies {
     //https://github.com/florent37/ShapeOfView
     implementation 'com.github.florent37:shapeofview:1.4.5'
 
+    //https://github.com/santalu/maskara
+    implementation 'com.github.santalu:maskara:1.0.0'
+
 }

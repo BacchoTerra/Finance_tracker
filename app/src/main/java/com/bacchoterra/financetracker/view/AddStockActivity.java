@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
+import com.bacchoterra.financetracker.tools.CalculateTotalSpend;
+import com.santalu.maskara.Mask;
+import com.santalu.maskara.widget.MaskEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +23,7 @@ public class AddStockActivity extends AppCompatActivity {
 
     //Layout views
     private Toolbar toolbar;
-    private EditText editDate;
+    private MaskEditText editDate;
     private EditText editPrice;
     private EditText editQuantity;
     private TextView txtTotalPrice;
@@ -40,7 +43,11 @@ public class AddStockActivity extends AppCompatActivity {
         calculateTotal();
     }
 
-    //23renato77
+    private void calculateTotal() {
+
+        new CalculateTotalSpend(editPrice,editQuantity,txtTotalPrice);
+
+    }
 
     private void init() {
 
@@ -67,76 +74,6 @@ public class AddStockActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
         editDate.setText(sdf.format(calendar.getTimeInMillis()));
-
-    }
-
-    private void calculateTotal() {
-
-        editPrice.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                if (!editQuantity.getText().toString().isEmpty() && charSequence.length() >0) {
-
-                    price = Float.parseFloat(charSequence.toString());
-                    quantity = Float.parseFloat(editQuantity.getText().toString());
-
-                    txtTotalPrice.setText(String.valueOf(price * quantity));
-
-                }
-
-                if (charSequence.length() == 0){
-
-                    txtTotalPrice.setText(null);
-
-                }
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        editQuantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                if (!editPrice.getText().toString().isEmpty() && charSequence.length() >0) {
-
-                    quantity = Float.parseFloat(charSequence.toString());
-                    price = Float.parseFloat(editPrice.getText().toString());
-
-                    txtTotalPrice.setText(String.valueOf(price * quantity));
-
-                }
-
-                if (charSequence.length() == 0){
-
-                    txtTotalPrice.setText(null);
-
-                }
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
     }
 
