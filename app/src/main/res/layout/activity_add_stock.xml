@@ -68,14 +68,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtInitial_price" />
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_choose_date"
+            <EditText
+                android:id="@+id/activity_add_stock_edit_date"
                 android:layout_width="wrap_content"
+                android:maxLength="10"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/dd_mm_yyyy"
+                android:layout_marginTop="8dp"
+                android:hint="dd/mm/yyyyy"
+                android:inputType="number"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/activity_add_stock_edit_price"
@@ -112,7 +116,7 @@
                 android:maxLength="5"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/renda_variavel"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_choose_date"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_edit_date"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_price"
                 tools:ignore="HardcodedText" />
 
@@ -167,6 +171,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_total_price"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_total_price"
                 tools:text="R$: 45,45" />
