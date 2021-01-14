@@ -8,4 +8,15 @@
     <string name="a_es_b3_bolsa_de_valores">Ações - B3 (Bolsa de valores)</string>
     <string name="planos_vgbl_e_pgbl">Planos VGBL e PGBL</string>
     <string name="previd_ncia_privada">Previdência privada</string>
+    <string name="acoes">Ações</string>
+    <string name="procurar">Procurar</string>
+    <string name="data">Data</string>
+    <string name="valor_da_a_o">Valor da ação</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="tecnica_utilizada_opcional">Tecnica utilizada: (Opcional)</string>
+    <string name="gr_ficos_analisados_opcional">Gráficos analisados (Opcional):</string>
+    <string name="tempo_esperado_de_investimento_opcional">Tempo esperado de investimento (Opcional):</string>
+    <string name="o_que_s_o_os_itens_acima">O que são os itens acima?</string>
+    <string name="dd_mm_yyyy">dd/mm/YYYY</string>
+    <string name="adicionar">Adicionar</string>
 </resources>

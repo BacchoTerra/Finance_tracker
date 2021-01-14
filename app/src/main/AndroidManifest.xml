@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinanceTracker">
+        <activity android:name=".view.AddStockActivity"
+            android:parentActivityName=".view.StocksActivity"/>
+        <activity
+            android:name=".view.StocksActivity"
+            android:parentActivityName=".view.MainActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

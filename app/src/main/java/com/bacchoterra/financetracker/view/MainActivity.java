@@ -1,22 +1,16 @@
 package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
-import com.bacchoterra.financetracker.model.Stock;
-import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.card.MaterialCardView;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private MaterialCardView cardRendaFixa;
     private MaterialCardView cardFundos;
@@ -30,20 +24,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        initCards();
         initCardSelection();
 
     }
 
     private void init(){
 
-        cardRendaFixa = findViewById(R.id.card_renda_fixa);
-        cardFundos = findViewById(R.id.card_fundos);
-        cardRendaVariavel = findViewById(R.id.card_renda_variavel);
-        cardPrevidencia = findViewById(R.id.card_renda_previdencia);
+        cardRendaFixa = findViewById(R.id.activity_main_card_renda_fixa);
+        cardFundos = findViewById(R.id.activity_main_card_fundos);
+        cardRendaVariavel = findViewById(R.id.activity_main_card_renda_variavel);
+        cardPrevidencia = findViewById(R.id.activity_main_card_renda_previdencia);
 
     }
 
-    private void initCardSelection(){
+    private void initCards(){
 
         cardRendaFixa.setOnClickListener(view -> Toast.makeText(this, "Renda Fixa", Toast.LENGTH_SHORT).show());
         cardFundos.setOnClickListener(view -> Toast.makeText(this, "Fundos", Toast.LENGTH_SHORT).show());
@@ -53,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initCardSelection(){
 
+        cardRendaFixa.setOnClickListener(view -> Toast.makeText(this, "Renda Fixa", Toast.LENGTH_SHORT).show());
+        cardFundos.setOnClickListener(view -> Toast.makeText(this, "Fundos", Toast.LENGTH_SHORT).show());
+
+        cardRendaVariavel.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,StocksActivity.class)));
+
+        cardPrevidencia.setOnClickListener(view -> Toast.makeText(this, "Previdência", Toast.LENGTH_SHORT).show());
+
+    }
 
 }

@@ -13,8 +13,8 @@ import java.util.List;
 
 public class StockViewModel extends AndroidViewModel {
 
-    private StockRepository repository;
-    private LiveData<List<Stock>> allStock;
+    private final StockRepository repository;
+    private final LiveData<List<Stock>> allStock;
 
 
     public StockViewModel(@NonNull Application application) {
