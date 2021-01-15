@@ -49,15 +49,6 @@
                 android:textColor="@color/black"
                 app:chipBackgroundColor="@color/chip_selection_color" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/sheet_help_stock_chip_graficos"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="@string/gr_ficos_analisados_opcional"
-                android:textColor="@color/black"
-                app:chipBackgroundColor="@color/chip_selection_color" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/sheet_help_stock_chip_tempo"

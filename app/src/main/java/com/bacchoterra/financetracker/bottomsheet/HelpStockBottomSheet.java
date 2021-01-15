@@ -1,4 +1,4 @@
-package com.bacchoterra.financetracker.tools;
+package com.bacchoterra.financetracker.bottomsheet;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,9 +50,6 @@ public class HelpStockBottomSheet extends BottomSheetDialogFragment {
 
                     txtInfo.setText(getResources().getString(R.string.tecnica_utilizada_description));
 
-                } else if (group.getCheckedChipId() == R.id.sheet_help_stock_chip_graficos) {
-
-                    txtInfo.setText(getResources().getString(R.string.graficos_analisados_description));
                 } else {
 
                     txtInfo.setText(getResources().getString(R.string.tempo_esperado_description));
