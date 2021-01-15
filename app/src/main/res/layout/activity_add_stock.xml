@@ -71,25 +71,25 @@
             <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/activity_add_stock_edit_date"
                 android:layout_width="wrap_content"
-                app:mask="__/__/____"
-                android:maxLength="10"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="dd/mm/yyyyy"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date"
+                app:mask="__/__/____"
                 tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/activity_add_stock_edit_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxLength="7"
                 android:layout_marginTop="8dp"
                 android:hint="R$ : xxxx.xx"
                 android:inputType="numberDecimal"
+                android:maxLength="7"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
@@ -150,7 +150,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/activity_add_stock_txt_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -180,20 +180,20 @@
                 tools:text="R$: 45,45" />
 
             <Button
-                android:id="@+id/activity_add_stock_btn_save"
+                android:id="@+id/activity_add_stock_btn_add"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/shape_btn_adicionar_acao"
-                android:padding="0dp"
                 android:text="@string/adicionar"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_help"
                 app:layout_constraintVertical_bias="0.3" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

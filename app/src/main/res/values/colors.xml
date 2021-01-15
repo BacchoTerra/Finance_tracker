@@ -17,4 +17,5 @@
     <color name="toolbar_text_color">#000000</color>
     <color name="status_bar_color">#000000</color>
     <color name="background_color">#f3f3f3</color>
+    <color name="chip_selected">#C0D5FF</color>
 </resources>

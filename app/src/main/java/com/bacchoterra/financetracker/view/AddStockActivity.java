@@ -2,17 +2,17 @@ package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.tools.CalculateTotalSpend;
-import com.santalu.maskara.Mask;
+import com.bacchoterra.financetracker.tools.HelpStockBottomSheet;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.text.SimpleDateFormat;
@@ -27,11 +27,11 @@ public class AddStockActivity extends AppCompatActivity {
     private EditText editPrice;
     private EditText editQuantity;
     private TextView txtTotalPrice;
+    private TextView txtHelp;
+    private Button btnAdd;
 
-    //Price calculation
-    float price;
-    float quantity;
-
+    //Help BottomSheet
+    private HelpStockBottomSheet bottomSheetHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class AddStockActivity extends AppCompatActivity {
         createToolbar();
         setEditDateToCurrentDate();
         calculateTotal();
+        showHelpBottomSheet();
     }
 
     private void calculateTotal() {
@@ -56,6 +57,8 @@ public class AddStockActivity extends AppCompatActivity {
         editPrice = findViewById(R.id.activity_add_stock_edit_price);
         editQuantity = findViewById(R.id.activity_add_stock_edit_quantity);
         txtTotalPrice = findViewById(R.id.activity_add_stock_txt_total_price_result);
+        btnAdd = findViewById(R.id.activity_add_stock_btn_add);
+        txtHelp = findViewById(R.id.activity_add_stock_txt_help);
 
     }
 
@@ -65,6 +68,22 @@ public class AddStockActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
         getSupportActionBar().setTitle(null);
+
+    }
+
+    private void showHelpBottomSheet(){
+
+        txtHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bottomSheetHelp == null){
+                    bottomSheetHelp = new HelpStockBottomSheet();
+                }
+
+                bottomSheetHelp.show(getSupportFragmentManager(),null);
+            }
+        });
+
 
     }
 

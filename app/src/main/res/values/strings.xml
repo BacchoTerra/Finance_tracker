@@ -13,10 +13,15 @@
     <string name="data">Data</string>
     <string name="valor_da_a_o">Valor da ação</string>
     <string name="quantidade">Quantidade</string>
-    <string name="tecnica_utilizada_opcional">Tecnica utilizada: (Opcional)</string>
+    <string name="tecnica_utilizada_opcional">Tecnica utilizada (Opcional):</string>
     <string name="gr_ficos_analisados_opcional">Gráficos analisados (Opcional):</string>
     <string name="tempo_esperado_de_investimento_opcional">Tempo esperado de investimento (Opcional):</string>
     <string name="o_que_s_o_os_itens_acima">O que são os itens acima?</string>
     <string name="dd_mm_yyyy">dd/mm/YYYY</string>
     <string name="adicionar">Adicionar</string>
+    <string name="tecnica_utilizada_description">Este item se refere a qual item de análise gráfica foi utilizada (caso alguma tenha sido), permitindo que possa ser feita uma comparação usando a mesma técnica futuramente.</string>
+    <string name="graficos_analisados_description">Neste seria interessante adicionar detalhes dos gráficos analisados, como tipo de gráfico, intervalo do gráfico, entre outros, para facilitar futuras comparações.</string>
+    <string name="tempo_esperado_description">O tempo esperado de investimento determina quanto tempo você pretende deixar a operação aberta (dias, semanas, meses, etc.), facilitando, futuramente, a escolha do intervalo do gráfico para analisar sua operação.</string>
+    <string name="ajuda">Ajuda</string>
+    <string name="qual_a_sua_duvida">Qual a sua dúvida?</string>
 </resources>

@@ -5,6 +5,8 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class CalculateTotalSpend {
 
     private EditText editPrice;
@@ -14,15 +16,19 @@ public class CalculateTotalSpend {
     private float value2;
     private float totalSpend;
 
+    //Float format
+    private DecimalFormat decimalFormat;
+
     public CalculateTotalSpend(EditText editPrice, EditText editQuantity, TextView txtTotalPrice) {
         this.editPrice = editPrice;
         this.editQuantity = editQuantity;
         this.txtTotalPrice = txtTotalPrice;
-        getTotalSpend();
+        decimalFormat = new DecimalFormat("0.00");
+        retrieveValues();
     }
 
 
-    private void getTotalSpend (){
+    private void retrieveValues(){
 
 
         editPrice.addTextChangedListener(new TextWatcher() {
@@ -33,7 +39,7 @@ public class CalculateTotalSpend {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                 txtTotalPrice.setText(String.valueOf(calculate(editPrice,editQuantity)));
+                 txtTotalPrice.setText(decimalFormat.format(calculate(editPrice,editQuantity)));
 
             }
 
@@ -51,7 +57,7 @@ public class CalculateTotalSpend {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                 txtTotalPrice.setText(String.valueOf(calculate(editQuantity,editPrice)));
+                 txtTotalPrice.setText(decimalFormat.format(calculate(editQuantity,editPrice)));
 
 
             }
