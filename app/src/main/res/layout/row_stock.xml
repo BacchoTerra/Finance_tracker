@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/activity_add_stock_carView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="80dp">
+
+            <TextView
+                android:id="@+id/activity_add_stock_txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/data"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/activity_add_stock_txtInitial_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/valor_da_a_o"
+                app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
+                app:layout_constraintStart_toEndOf="@+id/activity_add_stock_txt_date"
+                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txt_date" />
+
+            <TextView
+                android:id="@+id/activity_add_stock_txt_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/quantidade"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtInitial_price" />
+
+            <TextView
+                android:id="@+id/row_stock_txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxLength="10"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date"
+                tools:text="05/10/1998" />
+
+            <TextView
+                android:id="@+id/row_stock_txt_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtInitial_price"
+                tools:text="45,45" />
+
+            <TextView
+                android:id="@+id/row_stock_txt_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txt_quantity"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
+                app:layout_constraintTop_toTopOf="@+id/row_stock_txt_price"
+                tools:text="6" />
+
+            <TextView
+                android:id="@+id/row_stock_txt_sotck_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/renda_variavel"
+                app:layout_constraintStart_toStartOf="@+id/row_stock_txt_date"
+                app:layout_constraintTop_toBottomOf="@+id/row_stock_txt_price"
+                tools:text="BBDC4" />
+
+            <TextView
+                android:id="@+id/activity_add_stock_txt_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total gasto:"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
+                app:layout_constraintTop_toTopOf="@+id/row_stock_txt_sotck_name" />
+
+            <TextView
+                android:id="@+id/row_stock_txt_price_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_total_price"
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_total_price"
+                tools:text="R$: 45,45" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

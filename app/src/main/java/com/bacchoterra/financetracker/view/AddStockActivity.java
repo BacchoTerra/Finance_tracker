@@ -2,7 +2,10 @@ package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -14,13 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
+import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.tools.CalculateTotalSpend;
 import com.bacchoterra.financetracker.bottomsheet.HelpStockBottomSheet;
 import com.bacchoterra.financetracker.tools.CheckStockFields;
+import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.santalu.maskara.widget.MaskEditText;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class AddStockActivity extends AppCompatActivity {
@@ -47,7 +54,7 @@ public class AddStockActivity extends AppCompatActivity {
         setEditDateToCurrentDate();
         calculateTotal();
         showHelpBottomSheet();
-        checkAllFields();
+        initViewModel();
     }
 
     private void init() {
@@ -129,20 +136,54 @@ public class AddStockActivity extends AppCompatActivity {
 
     }
 
-    private void checkAllFields() {
+    private void initViewModel() {
 
-        CheckStockFields checkStockFields = new CheckStockFields(editDate, editPrice, editQuantity, editStockName, this);
+        StockViewModel stockViewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
+                .get(StockViewModel.class);
+
+        CheckStockFields checkStockFields = new CheckStockFields(editDate, editPrice,
+                editQuantity, editStockName, this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (checkStockFields.isEveryFieldOk()) {
-                    Toast.makeText(AddStockActivity.this, "Sucesso", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(AddStockActivity.this, "Erro", Toast.LENGTH_SHORT).show();
+
+                    stockViewModel.insert(createStock());
+
                 }
+
             }
         });
+
+
+    }
+
+    private Stock createStock() {
+
+        Stock stock = new Stock();
+        stock.setStockName(editStockName.getText().toString());
+        stock.setInitialPrice(Float.parseFloat(editPrice.getText().toString()));
+        stock.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
+        stock.setTotalSpent(Float.parseFloat(txtTotalPrice.getText().toString().replace(',', '.')));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        try {
+            assert editDate.getText() != null;
+            Date date = sdf.parse(editDate.getText().toString());
+            assert date != null;
+            stock.setInitialTimestamp(date.getTime());
+
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return stock;
 
 
     }
