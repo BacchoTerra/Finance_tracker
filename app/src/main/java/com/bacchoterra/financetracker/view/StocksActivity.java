@@ -47,6 +47,7 @@ public class StocksActivity extends AppCompatActivity {
         initClickListener();
         initRecyclerView();
         initViewModel();
+        viewModel.deleteAll();
     }
 
     private void initViewModel() {

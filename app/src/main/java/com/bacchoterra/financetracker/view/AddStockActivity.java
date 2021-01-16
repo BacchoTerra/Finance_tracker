@@ -139,10 +139,12 @@ public class AddStockActivity extends AppCompatActivity {
     private Stock createStock() {
 
         Stock stock = new Stock();
-        stock.setStockName(editStockName.getText().toString());
+        stock.setStockName(editStockName.getText().toString().toUpperCase());
         stock.setInitialPrice(Float.parseFloat(editPrice.getText().toString()));
         stock.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         stock.setTotalSpent(Float.parseFloat(txtTotalPrice.getText().toString().replace(',', '.')));
+
+        //TODO: Adicionar tecnica e tempo estimado se nao estiverem null
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 

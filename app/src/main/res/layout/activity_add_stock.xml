@@ -114,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="BBDC4"
+                android:textAllCaps="true"
                 android:inputType="textPersonName"
                 android:maxLength="5"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"

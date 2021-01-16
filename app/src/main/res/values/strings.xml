@@ -26,4 +26,8 @@
     <string name="qual_a_sua_duvida">Qual a sua dúvida?</string>
     <string name="valor_inicial">Valor inicial</string>
     <string name="money_symbol">R$:</string>
+    <string name="t_cnica_utilizada">Técnica utilizada: </string>
+    <string name="tempo_estimado">Tempo estimado:</string>
+    <string name="finalizar_opera_o">Finalizar operação</string>
+    <string name="total_gasto">Total gasto:</string>
 </resources>

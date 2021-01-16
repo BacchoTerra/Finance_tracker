@@ -36,6 +36,10 @@ public class Stock  implements Serializable {
     }
 
     public Stock() {
+
+        this.expectedTimeInvested = "null";
+        this.techniqueUsed = "null";
+
     }
 
     public String getStockName() {

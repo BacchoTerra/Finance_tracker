@@ -1,18 +1,23 @@
 package com.bacchoterra.financetracker.adapter;
 
 import android.content.Intent;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
+import com.google.android.material.card.MaterialCardView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -66,10 +71,13 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         Stock stock = getItem(position);
 
         bindStock(stock,holder);
+        expandCardLayout(holder);
 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        MaterialCardView baseCardView;
 
         TextView txtDate;
         TextView txtInitialPrice;
@@ -77,13 +85,28 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         TextView txtStockName;
         TextView txtTotalSpent;
 
+        ImageView imageExpand;
+
+        ConstraintLayout constraintLayoutExtra;
+        TextView txtTechnique;
+        TextView txtEstimatedTime;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            baseCardView = itemView.findViewById(R.id.row_stock_baseCardView);
+
             txtDate = itemView.findViewById(R.id.row_stock_txt_date);
             txtInitialPrice = itemView.findViewById(R.id.row_stock_txt_price);
             txtQuantity = itemView.findViewById(R.id.row_stock_txt_quantity);
             txtTotalSpent = itemView.findViewById(R.id.row_stock_txt_price_result);
             txtStockName = itemView.findViewById(R.id.row_stock_txt_sotck_name);
+
+            imageExpand = itemView.findViewById(R.id.row_stock_image_expand);
+
+            constraintLayoutExtra = itemView.findViewById(R.id.row_stock_constraintLayout_extra);
+            txtTechnique = itemView.findViewById(R.id.row_stock_txt_technique_2);
+            txtEstimatedTime = itemView.findViewById(R.id.row_stock_txt_estimated_time_2);
 
 
         }
@@ -110,5 +133,23 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         holder.txtInitialPrice.append(" " + initialPrice);
         holder.txtTotalSpent.append(" " + totalSped);
+
+        holder.txtTechnique.setText(stock.getTechniqueUsed());
+        holder.txtEstimatedTime.setText(stock.getExpectedTimeInvested());
+
+
+    }
+
+    private void expandCardLayout(MyViewHolder holder){
+
+        holder.imageExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition(holder.baseCardView,new AutoTransition());
+                holder.constraintLayoutExtra.setVisibility(holder.constraintLayoutExtra.getVisibility() == View.VISIBLE? View.GONE:View.VISIBLE);
+            }
+        });
+
+
     }
 }
