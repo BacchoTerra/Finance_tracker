@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp">
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginBottom="12dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/activity_add_stock_carView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:checkable="true"
         app:cardCornerRadius="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -18,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="80dp">
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/activity_add_stock_txt_date"
@@ -34,7 +36,7 @@
                 android:id="@+id/activity_add_stock_txtInitial_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/valor_da_a_o"
+                android:text="@string/valor_inicial"
                 app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintStart_toEndOf="@+id/activity_add_stock_txt_date"
                 app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txt_date" />
@@ -68,7 +70,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtInitial_price"
-                tools:text="45,45" />
+                tools:text="45,45"
+                android:text="@string/money_symbol" />
 
             <TextView
                 android:id="@+id/row_stock_txt_quantity"
@@ -87,6 +90,7 @@
                 android:layout_marginTop="40dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/renda_variavel"
+                android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="@+id/row_stock_txt_date"
                 app:layout_constraintTop_toBottomOf="@+id/row_stock_txt_price"
                 tools:text="BBDC4" />
@@ -108,6 +112,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_total_price"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_total_price"
+                android:text = "@string/money_symbol"
                 tools:text="R$: 45,45" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

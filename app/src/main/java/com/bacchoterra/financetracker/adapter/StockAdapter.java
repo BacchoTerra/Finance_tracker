@@ -103,8 +103,12 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
     private void bindStock(Stock stock,MyViewHolder holder){
         holder.txtStockName.setText(stock.getStockName());
         holder.txtDate.setText(getDate(stock));
-        holder.txtInitialPrice.setText(String.valueOf(stock.getInitialPrice()));
-        holder.txtTotalSpent.setText(String.valueOf(stock.getTotalSpent()));
         holder.txtQuantity.setText(String.valueOf(stock.getQuantity()));
+
+        String initialPrice = String.valueOf(stock.getInitialPrice()).replace('.',',');
+        String totalSped = String.valueOf(stock.getTotalSpent()).replace('.',',');
+
+        holder.txtInitialPrice.append(" " + initialPrice);
+        holder.txtTotalSpent.append(" " + totalSped);
     }
 }

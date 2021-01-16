@@ -24,4 +24,6 @@
     <string name="tempo_esperado_description">O tempo esperado de investimento determina quanto tempo você pretende deixar a operação aberta (dias, semanas, meses, etc.), facilitando, futuramente, a escolha do intervalo do gráfico para analisar sua operação.</string>
     <string name="ajuda">Ajuda</string>
     <string name="qual_a_sua_duvida">Qual a sua dúvida?</string>
+    <string name="valor_inicial">Valor inicial</string>
+    <string name="money_symbol">R$:</string>
 </resources>
