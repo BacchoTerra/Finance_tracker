@@ -54,7 +54,7 @@ public class AddStockActivity extends AppCompatActivity {
         setEditDateToCurrentDate();
         calculateTotal();
         showHelpBottomSheet();
-        initViewModel();
+        sendStockObjectToStockActivity();
     }
 
     private void init() {
@@ -136,31 +136,6 @@ public class AddStockActivity extends AppCompatActivity {
 
     }
 
-    private void initViewModel() {
-
-        StockViewModel stockViewModel = new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
-                .get(StockViewModel.class);
-
-        CheckStockFields checkStockFields = new CheckStockFields(editDate, editPrice,
-                editQuantity, editStockName, this);
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (checkStockFields.isEveryFieldOk()) {
-
-                    stockViewModel.insert(createStock());
-
-                }
-
-            }
-        });
-
-
-    }
-
     private Stock createStock() {
 
         Stock stock = new Stock();
@@ -184,6 +159,28 @@ public class AddStockActivity extends AppCompatActivity {
         }
 
         return stock;
+
+
+    }
+
+    private void sendStockObjectToStockActivity() {
+
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckStockFields checkStockFields = new CheckStockFields(editDate,editPrice,editQuantity,editStockName,AddStockActivity.this);
+
+                if (checkStockFields.isEveryFieldOk()){
+
+                    Intent intent = new Intent();
+                    intent.putExtra(StocksActivity.STOCK_KEY,createStock());
+                    setResult(RESULT_OK,intent);
+                    finish();
+
+                }
+            }
+        });
 
 
     }

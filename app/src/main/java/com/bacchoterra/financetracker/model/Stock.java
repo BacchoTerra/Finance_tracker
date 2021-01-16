@@ -3,8 +3,10 @@ package com.bacchoterra.financetracker.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "stock_table")
-public class Stock {
+public class Stock  implements Serializable {
 
     private String stockName; //mandatory
     private long initialTimestamp; //mandatory
