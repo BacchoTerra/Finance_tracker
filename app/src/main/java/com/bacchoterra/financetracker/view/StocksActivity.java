@@ -36,9 +36,7 @@ public class StocksActivity extends AppCompatActivity {
 
     //ActivityResult code
     public static final int ADD_STOCK = 100;
-    public static final int EDIT_STOCK = 200;
     public static final String ADD_STOCK_KEY = "add_stock_key";
-    public static final String EDIT_STOCK_KEY = "edit_stock_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

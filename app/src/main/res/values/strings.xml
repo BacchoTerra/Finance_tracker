@@ -39,4 +39,8 @@
     <string name="cancelar">Cancelar</string>
 
     <string name="delete_stock_dialog_message">Deletar a operação fará com que você não tenha mais acesso às informações dela. Preferivelmente você pode finalizar a operação, deixando o resgistro ainda visível, porém identidficado como finalizado.</string>
+    <string name="pre_o_final_da_a_o">Preço final da ação</string>
+    <string name="indique_o_preco_final_da_acao">Indique o preço final da ação</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="operacao_finalizada">Operação finalizada </string>
 </resources>

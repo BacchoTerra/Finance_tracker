@@ -18,4 +18,9 @@
     <color name="status_bar_color">#000000</color>
     <color name="background_color">#f3f3f3</color>
     <color name="chip_selected">#C0D5FF</color>
+
+    <color name="light_text_color">#757575</color>
+
+    <color name="profit_color">#70EF43</color>
+    <color name="deficit_color">#EF5350</color>
 </resources>

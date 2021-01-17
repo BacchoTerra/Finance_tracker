@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-
+                android:textColor="@color/light_text_color"
                 android:layout_marginTop="16dp"
                 android:text="@string/data"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
                 android:id="@+id/activity_add_stock_txtInitial_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
                 android:text="@string/valor_inicial"
                 app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintStart_toEndOf="@+id/activity_add_stock_txt_date"
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:textColor="@color/light_text_color"
                 android:text="@string/quantidade"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtInitial_price" />
@@ -54,6 +56,7 @@
             <TextView
                 android:id="@+id/row_stock_txt_date"
                 android:layout_width="wrap_content"
+                android:textColor="@color/light_text_color"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:maxLength="10"
@@ -66,6 +69,7 @@
                 android:id="@+id/row_stock_txt_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
                 android:layout_marginTop="8dp"
                 android:text="@string/money_symbol"
                 android:textSize="14sp"
@@ -79,6 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="@color/light_text_color"
                 app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintTop_toTopOf="@+id/row_stock_txt_price"
@@ -101,6 +106,7 @@
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
                 android:text="@string/total_gasto"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintTop_toTopOf="@+id/row_stock_txt_sotck_name" />
@@ -110,6 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textColor="@color/light_text_color"
                 android:layout_marginTop="8dp"
                 android:text="@string/money_symbol"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -135,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@string/t_cnica_utilizada"
+                    android:textColor="@color/light_text_color"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,6 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="@color/light_text_color"
                     app:layout_constraintLeft_toRightOf="@id/row_stock_txt_technique_1"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="medias moeveis" />
@@ -153,6 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/light_text_color"
                     android:text="@string/tempo_estimado"
                     android:layout_marginStart="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -163,6 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="@color/light_text_color"
                     app:layout_constraintBottom_toBottomOf="@id/row_stock_txt_estimated_time_1"
                     app:layout_constraintLeft_toRightOf="@id/row_stock_txt_estimated_time_1"
                     app:layout_constraintTop_toTopOf="@id/row_stock_txt_estimated_time_1"
@@ -173,6 +184,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/light_text_color"
                     android:text="@string/excluir_opera_o"
                     android:paddingHorizontal="3dp"
                     android:textStyle="bold"
@@ -180,7 +192,7 @@
                     app:layout_constraintTop_toBottomOf="@id/row_stock_txt_estimated_time_1" />
 
                 <Button
-                    android:id="@+id/row_stock_txt_btn_finalize"
+                    android:id="@+id/row_stock_btn_finalize"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="48dp"
@@ -190,6 +202,18 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/row_stock_txt_exclude" />
+
+                <TextView
+                    android:id="@+id/row_stock_txt_final"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="32dp"
+                    tools:visibility="visible"
+                    tools:text="Operação finalizada \nLucro (bruto) :45,45"
+                    app:layout_constraintTop_toBottomOf="@id/row_stock_txt_exclude"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

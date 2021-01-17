@@ -3,34 +3,31 @@ package com.bacchoterra.financetracker.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
-import com.bacchoterra.financetracker.view.AddStockActivity;
-import com.bacchoterra.financetracker.view.StocksActivity;
 import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.card.MaterialCardView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> {
@@ -79,7 +76,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_stock,parent,false);
+        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_stock, parent, false);
 
         return new MyViewHolder(itemList);
     }
@@ -89,11 +86,11 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         Stock stock = getItem(position);
 
-        bindStock(stock,holder);
+        bindStock(stock, holder);
         expandCardLayout(holder);
         checkCardView(holder);
-        excludeOperation(holder,stock);
-        finalizeOperation(holder,stock);
+        excludeOperation(holder, stock);
+        finalizeOperation(holder, stock);
 
     }
 
@@ -116,6 +113,8 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         Button btnFinalize;
 
+        TextView txtFinal;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -134,13 +133,15 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
             txtEstimatedTime = itemView.findViewById(R.id.row_stock_txt_estimated_time_2);
             txtExclude = itemView.findViewById(R.id.row_stock_txt_exclude);
 
-            btnFinalize = itemView.findViewById(R.id.row_stock_txt_btn_finalize);
+            btnFinalize = itemView.findViewById(R.id.row_stock_btn_finalize);
+
+            txtFinal = itemView.findViewById(R.id.row_stock_txt_final);
 
 
         }
     }
 
-    private String getDate(Stock stock){
+    private String getDate(Stock stock) {
 
         long timeInMillis = stock.getInitialTimestamp();
         calendar.setTimeInMillis(timeInMillis);
@@ -148,49 +149,21 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         return sdf.format(calendar.getTimeInMillis());
 
 
+    }
+
+    private void bindStock(Stock stock, MyViewHolder holder) {
+
+        buildRow(holder, stock, stock.isFinished());
 
     }
 
-    private void bindStock(Stock stock,MyViewHolder holder){
-        holder.txtStockName.setText(stock.getStockName());
-        holder.txtDate.setText(getDate(stock));
-        holder.txtQuantity.setText(String.valueOf(stock.getQuantity()));
-
-        String initialPrice = String.valueOf(stock.getInitialPrice()).replace('.',',');
-        String totalSpend = String.valueOf(stock.getTotalSpent()).replace('.',',');
-
-        holder.txtInitialPrice.setText(initialPrice);
-        holder.txtTotalSpent.setText(totalSpend);
-
-        if (stock.getTechniqueUsed().isEmpty()){
-            holder.txtTechnique.setText(activity.getResources().getString(R.string.nenhuma_definida));
-        }else {
-            holder.txtTechnique.setText(stock.getTechniqueUsed());
-        }
-
-        if (stock.getExpectedTimeInvested().isEmpty()){
-            holder.txtEstimatedTime.setText(activity.getResources().getString(R.string.tempo_indeterminado));
-        }else {
-            holder.txtEstimatedTime.setText(stock.getExpectedTimeInvested());
-        }
-
-        if (stock.isFinished()){
-
-            holder.txtStockName.setText("Finalizado");
-
-        }else {
-            holder.txtStockName.setText(stock.getStockName());
-        }
-
-    }
-
-    private void expandCardLayout(MyViewHolder holder){
+    private void expandCardLayout(MyViewHolder holder) {
 
         holder.imageExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TransitionManager.beginDelayedTransition(holder.baseCardView,new AutoTransition());
-                holder.constraintLayoutExtra.setVisibility(holder.constraintLayoutExtra.getVisibility() == View.VISIBLE? View.GONE:View.VISIBLE);
+                TransitionManager.beginDelayedTransition(holder.baseCardView, new AutoTransition());
+                holder.constraintLayoutExtra.setVisibility(holder.constraintLayoutExtra.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
         });
 
@@ -211,7 +184,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
             @Override
             public void onClick(View view) {
 
-                if (holder.baseCardView.isChecked()){
+                if (holder.baseCardView.isChecked()) {
                     holder.baseCardView.setChecked(false);
                 }
 
@@ -221,7 +194,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
-    private void excludeOperation(MyViewHolder holder,Stock stock){
+    private void excludeOperation(MyViewHolder holder, Stock stock) {
 
         holder.txtExclude.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +202,6 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
                 showDeleteDialog(stock);
             }
         });
-
 
 
     }
@@ -243,7 +215,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         builder.setPositiveButton(activity.getResources().getString(R.string.deletar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                     viewModel.delete(stock);
+                viewModel.delete(stock);
             }
         }).setNegativeButton(activity.getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
             @Override
@@ -257,19 +229,104 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
-    private void finalizeOperation(MyViewHolder holder,Stock stock){
+    private void finalizeOperation(MyViewHolder holder, Stock stock) {
 
         holder.btnFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                stock.setFinished(true);
-                viewModel.update(stock);
-
-
+                createFinalizerStockDialog(stock);
             }
         });
 
+
+    }
+
+    private void buildRow(MyViewHolder holder, Stock stock, boolean isFinished) {
+
+        if (isFinished) {
+            holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.light_text_color, null));
+            holder.btnFinalize.setVisibility(View.GONE);
+            holder.txtFinal.setVisibility(View.VISIBLE);
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            holder.txtFinal.setText(activity.getResources().getString(R.string.operacao_finalizada) + "R$: " + decimalFormat.format(stock.getProfit()));
+
+            if (stock.getProfit() < 0) {
+                holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.deficit_color, null));
+            }else {
+                holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.profit_color, null));
+            }
+
+
+        } else {
+            holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.renda_variavel, null));
+            holder.btnFinalize.setVisibility(View.VISIBLE);
+            holder.txtFinal.setVisibility(View.GONE);
+            holder.txtFinal.setText(null);
+        }
+
+        holder.txtStockName.setText(stock.getStockName());
+
+        holder.txtDate.setText(getDate(stock));
+        holder.txtQuantity.setText(String.valueOf(stock.getQuantity()));
+
+        String initialPrice = String.valueOf(stock.getInitialPrice()).replace('.', ',');
+        String totalSpend = String.valueOf(stock.getTotalSpent()).replace('.', ',');
+
+        holder.txtInitialPrice.setText(initialPrice);
+        holder.txtTotalSpent.setText(totalSpend);
+
+        if (stock.getTechniqueUsed().isEmpty()) {
+            holder.txtTechnique.setText(activity.getResources().getString(R.string.nenhuma_definida));
+        } else {
+            holder.txtTechnique.setText(stock.getTechniqueUsed());
+        }
+
+        if (stock.getExpectedTimeInvested().isEmpty()) {
+            holder.txtEstimatedTime.setText(activity.getResources().getString(R.string.tempo_indeterminado));
+        } else {
+            holder.txtEstimatedTime.setText(stock.getExpectedTimeInvested());
+        }
+
+
+    }
+
+    private void createFinalizerStockDialog(Stock stock) {
+
+        View view = activity.getLayoutInflater().inflate(R.layout.dialog_finalize_stock_op, null, false);
+        EditText editFinalPrice = view.findViewById(R.id.dialog_finalize_stock_op_editFinalPrice);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.indique_o_preco_final_da_acao);
+        builder.setView(view);
+
+        builder.setPositiveButton(R.string.finalizar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                stock.setFinished(true);
+                stock.setProfit(calculateFinalProfit(stock,Float.parseFloat(editFinalPrice.getText().toString())));
+                stock.setFinished(true);
+                viewModel.update(stock);
+            }
+        }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+    }
+
+    private float calculateFinalProfit(Stock stock,float finalPrice){
+
+        float totalInitialPrice = stock.getTotalSpent();
+        float totalFinalPrice = finalPrice * stock.getQuantity();
+
+        return totalFinalPrice - totalInitialPrice;
 
 
     }
