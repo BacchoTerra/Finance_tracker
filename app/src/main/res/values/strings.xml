@@ -30,4 +30,13 @@
     <string name="tempo_estimado">Tempo estimado:</string>
     <string name="finalizar_opera_o">Finalizar operação</string>
     <string name="total_gasto">Total gasto:</string>
+    <string name="editar_opera_o">Editar operação</string>
+    <string name="nenhuma_definida">Nenhuma definida</string>
+    <string name="tempo_indeterminado">Tempo indeterminado</string>
+    <string name="excluir_opera_o">Excluir operação</string>
+    <string name="deletar_operaçao">Deletar operação</string>
+    <string name="deletar">Deletar</string>
+    <string name="cancelar">Cancelar</string>
+
+    <string name="delete_stock_dialog_message">Deletar a operação fará com que você não tenha mais acesso às informações dela. Preferivelmente você pode finalizar a operação, deixando o resgistro ainda visível, porém identidficado como finalizado.</string>
 </resources>

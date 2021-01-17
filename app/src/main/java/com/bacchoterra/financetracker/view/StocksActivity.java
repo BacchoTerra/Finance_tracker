@@ -35,8 +35,10 @@ public class StocksActivity extends AppCompatActivity {
     private StockViewModel viewModel;
 
     //ActivityResult code
-    private static final int ADD_STOCK = 100;
-    public static final String STOCK_KEY = "stock_key";
+    public static final int ADD_STOCK = 100;
+    public static final int EDIT_STOCK = 200;
+    public static final String ADD_STOCK_KEY = "add_stock_key";
+    public static final String EDIT_STOCK_KEY = "edit_stock_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,8 @@ public class StocksActivity extends AppCompatActivity {
         init();
         initToolbar();
         initClickListener();
-        initRecyclerView();
         initViewModel();
-        viewModel.deleteAll();
+        initRecyclerView();
     }
 
     private void initViewModel() {
@@ -82,6 +83,7 @@ public class StocksActivity extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
 
@@ -92,7 +94,7 @@ public class StocksActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        stockAdapter = new StockAdapter();
+        stockAdapter = new StockAdapter(this,viewModel);
         recyclerView.setAdapter(stockAdapter);
 
 
@@ -133,7 +135,7 @@ public class StocksActivity extends AppCompatActivity {
 
 
             assert data != null && data.getExtras() != null;
-            Stock stock = (Stock) data.getExtras().get(STOCK_KEY);
+            Stock stock = (Stock) data.getExtras().get(ADD_STOCK_KEY);
             viewModel.insert(stock);
 
         }

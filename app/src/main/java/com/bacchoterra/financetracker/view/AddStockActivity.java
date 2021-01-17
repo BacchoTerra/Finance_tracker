@@ -2,8 +2,6 @@ package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.tools.CalculateTotalSpend;
 import com.bacchoterra.financetracker.bottomsheet.HelpStockBottomSheet;
 import com.bacchoterra.financetracker.tools.CheckStockFields;
-import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.text.ParseException;
@@ -38,6 +35,8 @@ public class AddStockActivity extends AppCompatActivity {
     private EditText editPrice;
     private EditText editQuantity;
     private EditText editStockName;
+    private EditText editTechnique;
+    private EditText editEstimatedTime;
     private TextView txtTotalPrice;
     private TextView txtHelp;
     private Button btnAdd;
@@ -64,6 +63,8 @@ public class AddStockActivity extends AppCompatActivity {
         editStockName = findViewById(R.id.activity_add_stock_edit_stock_name);
         editPrice = findViewById(R.id.activity_add_stock_edit_price);
         editQuantity = findViewById(R.id.activity_add_stock_edit_quantity);
+        editTechnique = findViewById(R.id.activity_add_stock_edit_technique);
+        editEstimatedTime = findViewById(R.id.activity_add_stock_edit_estimated_time);
         txtTotalPrice = findViewById(R.id.activity_add_stock_txt_total_price_result);
         btnAdd = findViewById(R.id.activity_add_stock_btn_add);
         txtHelp = findViewById(R.id.activity_add_stock_txt_help);
@@ -144,8 +145,6 @@ public class AddStockActivity extends AppCompatActivity {
         stock.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         stock.setTotalSpent(Float.parseFloat(txtTotalPrice.getText().toString().replace(',', '.')));
 
-        //TODO: Adicionar tecnica e tempo estimado se nao estiverem null
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
         try {
@@ -159,6 +158,15 @@ public class AddStockActivity extends AppCompatActivity {
             e.printStackTrace();
 
         }
+
+        if (!editTechnique.getText().toString().isEmpty()){
+            stock.setTechniqueUsed(editTechnique.getText().toString());
+        }
+
+        if (!editEstimatedTime.getText().toString().isEmpty()){
+            stock.setExpectedTimeInvested(editEstimatedTime.getText().toString());
+        }
+
 
         return stock;
 
@@ -176,7 +184,7 @@ public class AddStockActivity extends AppCompatActivity {
                 if (checkStockFields.isEveryFieldOk()){
 
                     Intent intent = new Intent();
-                    intent.putExtra(StocksActivity.STOCK_KEY,createStock());
+                    intent.putExtra(StocksActivity.ADD_STOCK_KEY,createStock());
                     setResult(RESULT_OK,intent);
                     finish();
 

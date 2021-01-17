@@ -139,7 +139,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/tempo_esperado_de_investimento_opcional"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_technique" />
 
             <TextView
                 android:id="@+id/activity_add_stock_txt_help"
@@ -150,7 +150,7 @@
                 android:text="@string/o_que_s_o_os_itens_acima"
                 app:drawableEndCompat="@drawable/ic_baseline_help_outline_24"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_estimated_time" />
 
             <TextView
                 android:id="@+id/activity_add_stock_txt_total_price"
@@ -187,7 +187,7 @@
                 app:layout_constraintVertical_bias="0.3" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/activity_add_stock_edit_technique"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
@@ -201,7 +201,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/activity_add_stock_edit_estimated_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
