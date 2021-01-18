@@ -43,4 +43,5 @@
     <string name="indique_o_preco_final_da_acao">Indique o preço final da ação</string>
     <string name="finalizar">Finalizar</string>
     <string name="operacao_finalizada">Operação finalizada </string>
+    <string name="insira_um_valor_valido">Insira um valor válido</string>
 </resources>

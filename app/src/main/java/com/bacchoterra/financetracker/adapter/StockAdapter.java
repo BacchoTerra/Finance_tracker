@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -42,6 +43,10 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
     private Calendar calendar;
     private SimpleDateFormat sdf;
 
+    //Row objects
+    private DecimalFormat decimalFormat;
+    private StringBuilder stringBuilder;
+
 
     private static final DiffUtil.ItemCallback<Stock> DIFF_UTIL = new DiffUtil.ItemCallback<Stock>() {
         @Override
@@ -69,6 +74,8 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         calendar = Calendar.getInstance();
         sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        decimalFormat = new DecimalFormat("0.00");
 
     }
 
@@ -245,24 +252,10 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
     private void buildRow(MyViewHolder holder, Stock stock, boolean isFinished) {
 
         if (isFinished) {
-            holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.light_text_color, null));
-            holder.btnFinalize.setVisibility(View.GONE);
-            holder.txtFinal.setVisibility(View.VISIBLE);
-            DecimalFormat decimalFormat = new DecimalFormat("0.00");
-            holder.txtFinal.setText(activity.getResources().getString(R.string.operacao_finalizada) + "R$: " + decimalFormat.format(stock.getProfit()));
-
-            if (stock.getProfit() < 0) {
-                holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.deficit_color, null));
-            }else {
-                holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.profit_color, null));
-            }
-
+            bindFinishedRow(holder, stock);
 
         } else {
-            holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.renda_variavel, null));
-            holder.btnFinalize.setVisibility(View.VISIBLE);
-            holder.txtFinal.setVisibility(View.GONE);
-            holder.txtFinal.setText(null);
+            bindUnfinishedRow(holder);
         }
 
         holder.txtStockName.setText(stock.getStockName());
@@ -291,6 +284,35 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
+    private void bindFinishedRow(MyViewHolder holder, Stock stock) {
+
+        holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.light_text_color, null));
+        holder.btnFinalize.setVisibility(View.GONE);
+        holder.txtFinal.setVisibility(View.VISIBLE);
+
+        stringBuilder = new StringBuilder("");
+        stringBuilder.append(activity.getString(R.string.operacao_finalizada));
+        stringBuilder.append(" R$:");
+        stringBuilder.append(decimalFormat.format(stock.getProfit()));
+        holder.txtFinal.setText(stringBuilder);
+
+        if (stock.getProfit() < 0) {
+            holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.deficit_color, null));
+        } else {
+            holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.profit_color, null));
+        }
+
+    }
+
+    private void bindUnfinishedRow(MyViewHolder holder) {
+
+        holder.txtStockName.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.renda_variavel, null));
+        holder.btnFinalize.setVisibility(View.VISIBLE);
+        holder.txtFinal.setVisibility(View.GONE);
+        holder.txtFinal.setText(null);
+
+    }
+
     private void createFinalizerStockDialog(Stock stock) {
 
         View view = activity.getLayoutInflater().inflate(R.layout.dialog_finalize_stock_op, null, false);
@@ -303,10 +325,17 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         builder.setPositiveButton(R.string.finalizar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                stock.setFinished(true);
-                stock.setProfit(calculateFinalProfit(stock,Float.parseFloat(editFinalPrice.getText().toString())));
-                stock.setFinished(true);
-                viewModel.update(stock);
+
+                if (!editFinalPrice.getText().toString().isEmpty()) {
+                    stock.setFinished(true);
+                    stock.setProfit(calculateFinalProfit(stock, Float.parseFloat(editFinalPrice.getText().toString())));
+                    stock.setFinished(true);
+                    viewModel.update(stock);
+
+                } else {
+                    Toast.makeText(activity, activity.getString(R.string.insira_um_valor_valido), Toast.LENGTH_SHORT).show();
+                }
+
             }
         }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             @Override
@@ -321,7 +350,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
-    private float calculateFinalProfit(Stock stock,float finalPrice){
+    private float calculateFinalProfit(Stock stock, float finalPrice) {
 
         float totalInitialPrice = stock.getTotalSpent();
         float totalFinalPrice = finalPrice * stock.getQuantity();
