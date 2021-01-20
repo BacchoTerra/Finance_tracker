@@ -3,10 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_toobar_search_icon"
-        android:title="@string/procurar"
+        android:id="@+id/menu_toolbar_search_icon"
         android:icon="@drawable/ic_round_search_24"
-        app:showAsAction="always"
-        />
+        android:title="@string/procurar"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_toolbar_sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:title="@string/filtrar"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:title="@string/todas_acoes"
+                android:id="@+id/menu_toolbar_all_stock"/>
+
+            <item
+                android:title="@string/pre_o_total_maior_menor"
+                android:id="@+id/menu_toolbar_total_price"/>
+
+            <item
+                android:title="@string/pre_o_a_o_maior_menor"
+                android:id="@+id/menu_toolbar_stock_price"/>
+
+            <item
+                android:title="@string/somente_finalizadas"
+                android:id="@+id/menu_toolbar_finalized"/>
+
+            <item
+                android:title="@string/somente_abertas"
+                android:id="@+id/menu_toolbar_opened"/>
+
+        </menu>
+
+    </item>
 
 </menu>

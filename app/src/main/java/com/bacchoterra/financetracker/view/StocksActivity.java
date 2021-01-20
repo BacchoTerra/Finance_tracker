@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StocksActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class StocksActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private StockAdapter stockAdapter;
     private StockViewModel viewModel;
+    private LiveData<List<Stock>> selectedStocks;
 
     //ActivityResult code
     public static final int ADD_STOCK = 100;
@@ -47,19 +50,7 @@ public class StocksActivity extends AppCompatActivity {
         initClickListener();
         initViewModel();
         initRecyclerView();
-    }
-
-    private void initViewModel() {
-
-        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockViewModel.class);
-
-        viewModel.getAllStock().observe(this, new Observer<List<Stock>>() {
-            @Override
-            public void onChanged(List<Stock> stocks) {
-                stockAdapter.submitList(stocks);
-            }
-        });
-
+        getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter);
     }
 
     private void init() {
@@ -88,11 +79,31 @@ public class StocksActivity extends AppCompatActivity {
 
     }
 
+    private void initViewModel() {
+
+        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockViewModel.class);
+
+    }
+
+    private void getItemsFromViewModel(int options, StockAdapter adapter) {
+
+
+        selectedStocks = viewModel.getAllStock(options);
+
+        selectedStocks.observe(this, new Observer<List<Stock>>() {
+            @Override
+            public void onChanged(List<Stock> stocks) {
+                adapter.submitList(stocks);
+            }
+        });
+
+    }
+
     private void initRecyclerView() {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        stockAdapter = new StockAdapter(this,viewModel);
+        stockAdapter = new StockAdapter(this, viewModel);
         recyclerView.setAdapter(stockAdapter);
 
 
@@ -110,8 +121,31 @@ public class StocksActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
 
-        if (item.getItemId() == R.id.menu_toobar_search_icon) {
-            Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.menu_toolbar_search_icon:
+                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.menu_toolbar_all_stock:
+                getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter);
+                break;
+
+            case R.id.menu_toolbar_total_price:
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_TOTAL_SPENT,stockAdapter);
+                break;
+
+            case R.id.menu_toolbar_stock_price:
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_INITIAL_PRICE,stockAdapter);
+                break;
+
+            case R.id.menu_toolbar_finalized:
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_FINISHED, stockAdapter);
+                break;
+
+            case R.id.menu_toolbar_opened:
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_OPENED,stockAdapter);
+
+
         }
 
 

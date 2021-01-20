@@ -20,6 +20,8 @@ public class StockRepository {
     private static final int UPDATE = 3;
 
 
+
+
     public StockDao mDao;
     public LiveData<List<Stock>> allRendaVariavel;
 
@@ -27,8 +29,6 @@ public class StockRepository {
 
         MyDatabase myDatabase = MyDatabase.getInstance(app);
         mDao = myDatabase.getRendaVariavelDao();
-
-        allRendaVariavel = mDao.selectAllFromRendaVariavel();
     }
 
     public void insert(Stock stock){
@@ -56,10 +56,39 @@ public class StockRepository {
 
     public LiveData<List<Stock>> getAllRendaVariavel(){
 
+        allRendaVariavel = mDao.selectAllFromRendaVariavel();
         return this.allRendaVariavel;
 
     }
 
+    public LiveData<List<Stock>> getAllFromRendaVariavelFinished(){
+
+        allRendaVariavel = mDao.selectAllFromRendaVariavelFinished();
+
+        return allRendaVariavel;
+
+    }
+
+    public LiveData<List<Stock>> getAllFromRendaVariavelOpened(){
+
+        allRendaVariavel = mDao.selectAllFromRendaVariavelOpened();
+        return allRendaVariavel;
+
+
+    }
+
+    public LiveData<List<Stock>> getAllFromRendaVariavelOrderByTotalSpent(){
+
+        allRendaVariavel = mDao.selectAllFromRendaVariavelOrderByTotalSpent();
+        return allRendaVariavel;
+
+    }
+
+    public LiveData<List<Stock>> getAllFromRendaVariavelOrderByInitialPrice(){
+        allRendaVariavel = mDao.selectAllFromRendaVariavelOrderByInitialPrice();
+
+        return allRendaVariavel;
+    }
 
     private static class SqlOperations extends AsyncTask<Stock, Void, Void> {
 

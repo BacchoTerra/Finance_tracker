@@ -29,6 +29,18 @@ public interface StockDao {
     @Query("SELECT * FROM stock_table")
     LiveData<List<Stock>> selectAllFromRendaVariavel();
 
+    @Query("SELECT * FROM stock_table WHERE isFinished = 0")
+    LiveData<List<Stock>> selectAllFromRendaVariavelOpened();
+
+    @Query("SELECT * FROM stock_table WHERE isFinished = 1")
+    LiveData<List<Stock>> selectAllFromRendaVariavelFinished();
+
+    @Query("SELECT * FROM stock_table ORDER BY totalSpent DESC")
+    LiveData<List<Stock>> selectAllFromRendaVariavelOrderByTotalSpent();
+
+    @Query("SELECT * FROM stock_table ORDER BY initialPrice DESC")
+    LiveData<List<Stock>> selectAllFromRendaVariavelOrderByInitialPrice();
+
 
 
 }

@@ -21,6 +21,6 @@
 
     <color name="light_text_color">#757575</color>
 
-    <color name="profit_color">#70EF43</color>
-    <color name="deficit_color">#EF5350</color>
+    <color name="profit_color">#0f9c58</color>
+    <color name="deficit_color">#d60c3a</color>
 </resources>

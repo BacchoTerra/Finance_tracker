@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,6 +61,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         public boolean areContentsTheSame(@NonNull Stock oldItem, @NonNull Stock newItem) {
 
 
+
             return oldItem.getStockName().equals(newItem.getStockName()) && oldItem.getExpectedTimeInvested().equals(newItem.getExpectedTimeInvested()) && oldItem.getFinalTimestamp() == newItem.getFinalTimestamp() && oldItem.getInitialPrice() == newItem.getInitialPrice() && oldItem.getInitialTimestamp() == newItem.getInitialTimestamp() && oldItem.getProfit() == newItem.getProfit() && oldItem.getQuantity() == newItem.getQuantity() && oldItem.getTechniqueUsed().equals(newItem.getTechniqueUsed()) && oldItem.getTotalSpent() == newItem.getTotalSpent();
 
 
@@ -97,7 +100,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         expandCardLayout(holder);
         checkCardView(holder);
         excludeOperation(holder, stock);
-        finalizeOperation(holder, stock);
+        finalizeOperation(holder, stock,position);
 
     }
 
@@ -109,6 +112,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         TextView txtInitialPrice;
         TextView txtQuantity;
         TextView txtStockName;
+        ImageView imageMoney;
         TextView txtTotalSpent;
 
         ImageView imageExpand;
@@ -132,6 +136,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
             txtQuantity = itemView.findViewById(R.id.row_stock_txt_quantity);
             txtTotalSpent = itemView.findViewById(R.id.row_stock_txt_price_result);
             txtStockName = itemView.findViewById(R.id.row_stock_txt_sotck_name);
+            imageMoney = itemView.findViewById(R.id.row_stock_imageMoney);
 
             imageExpand = itemView.findViewById(R.id.row_stock_image_expand);
 
@@ -236,15 +241,51 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
-    private void finalizeOperation(MyViewHolder holder, Stock stock) {
+    private void finalizeOperation(MyViewHolder holder, Stock stock,int position) {
 
         holder.btnFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                createFinalizerStockDialog(stock);
+                createFinalizerStockDialog(stock,position);
             }
         });
+    }
+
+    private void createFinalizerStockDialog(Stock stock,int position) {
+
+        View view = activity.getLayoutInflater().inflate(R.layout.dialog_finalize_stock_op, null, false);
+        EditText editFinalPrice = view.findViewById(R.id.dialog_finalize_stock_op_editFinalPrice);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.indique_o_preco_final_da_acao);
+        builder.setView(view);
+
+        builder.setPositiveButton(R.string.finalizar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                if (!editFinalPrice.getText().toString().isEmpty()) {
+                    stock.setFinished(true);
+                    stock.setProfit(calculateFinalProfit(stock, Float.parseFloat(editFinalPrice.getText().toString())));
+                    stock.setFinished(true);
+                    viewModel.update(stock);
+                    notifyItemChanged(position);
+
+                } else {
+                    Toast.makeText(activity, activity.getString(R.string.insira_um_valor_valido), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
 
     }
@@ -292,14 +333,20 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         stringBuilder = new StringBuilder("");
         stringBuilder.append(activity.getString(R.string.operacao_finalizada));
-        stringBuilder.append(" R$:");
+        stringBuilder.append(" ");
+        stringBuilder.append(activity.getString(R.string.money_symbol));
         stringBuilder.append(decimalFormat.format(stock.getProfit()));
         holder.txtFinal.setText(stringBuilder);
 
         if (stock.getProfit() < 0) {
             holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.deficit_color, null));
+            holder.imageMoney.setVisibility(View.VISIBLE);
+            DrawableCompat.setTint(holder.imageMoney.getDrawable(), ContextCompat.getColor(activity,R.color.deficit_color));
         } else {
             holder.txtFinal.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.profit_color, null));
+            holder.imageMoney.setVisibility(View.VISIBLE);
+            DrawableCompat.setTint(holder.imageMoney.getDrawable(), ContextCompat.getColor(activity,R.color.profit_color));
+
         }
 
     }
@@ -310,43 +357,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         holder.btnFinalize.setVisibility(View.VISIBLE);
         holder.txtFinal.setVisibility(View.GONE);
         holder.txtFinal.setText(null);
-
-    }
-
-    private void createFinalizerStockDialog(Stock stock) {
-
-        View view = activity.getLayoutInflater().inflate(R.layout.dialog_finalize_stock_op, null, false);
-        EditText editFinalPrice = view.findViewById(R.id.dialog_finalize_stock_op_editFinalPrice);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.indique_o_preco_final_da_acao);
-        builder.setView(view);
-
-        builder.setPositiveButton(R.string.finalizar, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                if (!editFinalPrice.getText().toString().isEmpty()) {
-                    stock.setFinished(true);
-                    stock.setProfit(calculateFinalProfit(stock, Float.parseFloat(editFinalPrice.getText().toString())));
-                    stock.setFinished(true);
-                    viewModel.update(stock);
-
-                } else {
-                    Toast.makeText(activity, activity.getString(R.string.insira_um_valor_valido), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
+        holder.imageMoney.setVisibility(View.GONE);
 
     }
 

@@ -25,7 +25,7 @@
     <string name="ajuda">Ajuda</string>
     <string name="qual_a_sua_duvida">Qual a sua dúvida?</string>
     <string name="valor_inicial">Valor inicial</string>
-    <string name="money_symbol">R$:</string>
+    <string name="money_symbol">R$</string>
     <string name="t_cnica_utilizada">Técnica utilizada: </string>
     <string name="tempo_estimado">Tempo estimado:</string>
     <string name="finalizar_opera_o">Finalizar operação</string>
@@ -44,4 +44,11 @@
     <string name="finalizar">Finalizar</string>
     <string name="operacao_finalizada">Operação finalizada </string>
     <string name="insira_um_valor_valido">Insira um valor válido</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="ordem_alfabetica">Ordem alfabetica</string>
+    <string name="pre_o_total_maior_menor">Preço total(maior-menor)</string>
+    <string name="pre_o_a_o_maior_menor">Preço ação (maior-menor)</string>
+    <string name="somente_finalizadas">Somente finalizadas</string>
+    <string name="somente_abertas">Somente abertas</string>
+    <string name="todas_acoes">Todas</string>
 </resources>
