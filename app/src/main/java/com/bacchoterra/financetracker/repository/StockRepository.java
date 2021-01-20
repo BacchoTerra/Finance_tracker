@@ -90,6 +90,14 @@ public class StockRepository {
         return allRendaVariavel;
     }
 
+    public LiveData<List<Stock>>  getAllFromRendaVariavelOrderByName(String query){
+
+        allRendaVariavel = mDao.selectAllFromRendaVariavelByName(query);
+
+        return allRendaVariavel;
+
+    }
+
     private static class SqlOperations extends AsyncTask<Stock, Void, Void> {
 
         private final StockDao mDao;

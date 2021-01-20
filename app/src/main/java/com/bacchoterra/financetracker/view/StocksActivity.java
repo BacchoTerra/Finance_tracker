@@ -14,6 +14,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
@@ -21,7 +24,9 @@ import com.bacchoterra.financetracker.adapter.StockAdapter;
 import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -30,6 +35,9 @@ public class StocksActivity extends AppCompatActivity {
     //Layout Components
     private Toolbar toolbar;
     private FloatingActionButton fabAddStock;
+    private MaterialSearchView searchView;
+    private ImageView imageBackgroung;
+    private TextView txtNoItem;
 
     //RecyclerView and ViewModel
     private RecyclerView recyclerView;
@@ -50,7 +58,8 @@ public class StocksActivity extends AppCompatActivity {
         initClickListener();
         initViewModel();
         initRecyclerView();
-        getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter);
+        getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter,null);
+        setSearchViewListener();
     }
 
     private void init() {
@@ -58,6 +67,10 @@ public class StocksActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.activity_stock_toolbar);
         fabAddStock = findViewById(R.id.activity_stock_fab_add);
         recyclerView = findViewById(R.id.activity_stock_recycler_view);
+        searchView = findViewById(R.id.activity_stock_search_view);
+
+        imageBackgroung = findViewById(R.id.activity_stock_image_background);
+        txtNoItem = findViewById(R.id.activity_stock_txt_no_item);
 
     }
 
@@ -82,18 +95,26 @@ public class StocksActivity extends AppCompatActivity {
     private void initViewModel() {
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockViewModel.class);
-
     }
 
-    private void getItemsFromViewModel(int options, StockAdapter adapter) {
+    private void getItemsFromViewModel(int options, StockAdapter adapter,String query) {
 
 
-        selectedStocks = viewModel.getAllStock(options);
+        selectedStocks = viewModel.getAllStock(options,query);
 
         selectedStocks.observe(this, new Observer<List<Stock>>() {
             @Override
             public void onChanged(List<Stock> stocks) {
                 adapter.submitList(stocks);
+
+                if (stocks.size() == 0){
+                    imageBackgroung.setVisibility(View.VISIBLE);
+                    txtNoItem.setVisibility(View.VISIBLE);
+                }else {
+                    imageBackgroung.setVisibility(View.GONE);
+                    txtNoItem.setVisibility(View.GONE);
+                }
+
             }
         });
 
@@ -109,17 +130,43 @@ public class StocksActivity extends AppCompatActivity {
 
     }
 
+    private void setSearchViewListener(){
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                if (newText.length() >0){
+                    getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME,stockAdapter,newText.toUpperCase() + "%");
+                    return true;
+                }else {
+                    getItemsFromViewModel(StockViewModel.SELECT_ALL,stockAdapter,null);
+                }
+
+                return false;
+            }
+        });
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_toobar_search_icon, menu);
 
-        return super.onCreateOptionsMenu(menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_toolbar_search_icon);
+        searchView.setMenuItem(menuItem);
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
 
         switch (item.getItemId()) {
             case R.id.menu_toolbar_search_icon:
@@ -127,23 +174,23 @@ public class StocksActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_toolbar_all_stock:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter,null);
                 break;
 
             case R.id.menu_toolbar_total_price:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_TOTAL_SPENT,stockAdapter);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_TOTAL_SPENT,stockAdapter,null);
                 break;
 
             case R.id.menu_toolbar_stock_price:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_INITIAL_PRICE,stockAdapter);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_INITIAL_PRICE,stockAdapter,null);
                 break;
 
             case R.id.menu_toolbar_finalized:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_FINISHED, stockAdapter);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_FINISHED, stockAdapter,null);
                 break;
 
             case R.id.menu_toolbar_opened:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_OPENED,stockAdapter);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_OPENED,stockAdapter,null);
 
 
         }

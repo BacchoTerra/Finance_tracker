@@ -7,13 +7,10 @@
     android:layout_marginHorizontal="4dp"
     android:layout_marginBottom="12dp">
 
-    <!--TODO: fazer um row para operaçes abertas e um para fechadas..no de fechadas vai mostrar de cara a data final, valor total inicial, e valor total final, profit e nome da açao. e ao expandir vai ser igual ao de abertas, so que vai ter valor inicial da açao, quantidade, e data de compra....a de operaçao aberta vai se manter do jeito que esta-->
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/row_stock_baseCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:checkable="true"
         app:cardCornerRadius="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

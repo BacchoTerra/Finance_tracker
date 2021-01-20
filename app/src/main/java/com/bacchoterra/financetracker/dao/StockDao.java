@@ -41,6 +41,9 @@ public interface StockDao {
     @Query("SELECT * FROM stock_table ORDER BY initialPrice DESC")
     LiveData<List<Stock>> selectAllFromRendaVariavelOrderByInitialPrice();
 
+    @Query("SELECT * FROM stock_table WHERE stockName LIKE :query")
+    LiveData<List<Stock>> selectAllFromRendaVariavelByName(String query);
+
 
 
 }

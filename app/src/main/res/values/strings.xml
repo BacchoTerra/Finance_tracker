@@ -51,4 +51,5 @@
     <string name="somente_finalizadas">Somente finalizadas</string>
     <string name="somente_abertas">Somente abertas</string>
     <string name="todas_acoes">Todas</string>
+    <string name="n_o_encontramos_nenhum_item">Não encontramos nenhum item..</string>
 </resources>

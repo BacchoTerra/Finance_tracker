@@ -98,7 +98,6 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         bindStock(stock, holder);
         expandCardLayout(holder);
-        checkCardView(holder);
         excludeOperation(holder, stock);
         finalizeOperation(holder, stock,position);
 
@@ -176,30 +175,6 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
             public void onClick(View view) {
                 TransitionManager.beginDelayedTransition(holder.baseCardView, new AutoTransition());
                 holder.constraintLayoutExtra.setVisibility(holder.constraintLayoutExtra.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-            }
-        });
-
-
-    }
-
-    private void checkCardView(MyViewHolder holder) {
-
-        holder.baseCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                holder.baseCardView.setChecked(!holder.baseCardView.isChecked());
-                return true;
-            }
-        });
-
-        holder.baseCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (holder.baseCardView.isChecked()) {
-                    holder.baseCardView.setChecked(false);
-                }
-
             }
         });
 

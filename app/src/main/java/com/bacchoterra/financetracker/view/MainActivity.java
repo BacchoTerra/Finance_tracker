@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        initCards();
         initCardSelection();
 
     }
@@ -35,16 +34,6 @@ public class MainActivity extends AppCompatActivity{
         cardFundos = findViewById(R.id.activity_main_card_fundos);
         cardRendaVariavel = findViewById(R.id.activity_main_card_renda_variavel);
         cardPrevidencia = findViewById(R.id.activity_main_card_renda_previdencia);
-
-    }
-
-    private void initCards(){
-
-        cardRendaFixa.setOnClickListener(view -> Toast.makeText(this, "Renda Fixa", Toast.LENGTH_SHORT).show());
-        cardFundos.setOnClickListener(view -> Toast.makeText(this, "Fundos", Toast.LENGTH_SHORT).show());
-        cardRendaVariavel.setOnClickListener(view -> Toast.makeText(this, "Renda Variavel", Toast.LENGTH_SHORT).show());
-        cardPrevidencia.setOnClickListener(view -> Toast.makeText(this, "Previdência", Toast.LENGTH_SHORT).show());
-
 
     }
 

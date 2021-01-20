@@ -3,6 +3,7 @@ package com.bacchoterra.financetracker.viewmodel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -19,6 +20,8 @@ public class StockViewModel extends AndroidViewModel {
     public static final int SELECT_ALL_OPENED = 2;
     public static final int SELECT_ALL_BY_INITIAL_PRICE = 3;
     public static final int SELECT_ALL_BY_TOTAL_SPENT = 4;
+    public static final int SELECT_ALL_BY_NAME = 5;
+
 
 
     private final StockRepository repository;
@@ -48,7 +51,7 @@ public class StockViewModel extends AndroidViewModel {
         repository.deleteAll();
     }
 
-    public LiveData<List<Stock>> getAllStock(int option){
+    public LiveData<List<Stock>> getAllStock(int option,@Nullable String query){
 
         switch (option){
 
@@ -70,6 +73,9 @@ public class StockViewModel extends AndroidViewModel {
             case SELECT_ALL_BY_TOTAL_SPENT:
                 allStock = repository.getAllFromRendaVariavelOrderByTotalSpent();
                 break;
+
+            case SELECT_ALL_BY_NAME:
+                allStock = repository.getAllFromRendaVariavelOrderByName(query);
 
         }
 
