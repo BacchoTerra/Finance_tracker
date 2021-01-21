@@ -46,10 +46,11 @@
     <string name="insira_um_valor_valido">Insira um valor válido</string>
     <string name="filtrar">Filtrar</string>
     <string name="ordem_alfabetica">Ordem alfabetica</string>
-    <string name="pre_o_total_maior_menor">Preço total(maior-menor)</string>
+    <string name="pre_o_total_maior_menor">Preço total (maior-menor)</string>
     <string name="pre_o_a_o_maior_menor">Preço ação (maior-menor)</string>
     <string name="somente_finalizadas">Somente finalizadas</string>
     <string name="somente_abertas">Somente abertas</string>
     <string name="todas_acoes">Todas</string>
     <string name="n_o_encontramos_nenhum_item">Não encontramos nenhum item..</string>
+    <string name="sucesso">Sucesso</string>
 </resources>

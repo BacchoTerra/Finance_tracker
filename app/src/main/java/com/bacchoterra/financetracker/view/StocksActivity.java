@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.adapter.StockAdapter;
+import com.bacchoterra.financetracker.adapter.StockAdapter2;
 import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +42,8 @@ public class StocksActivity extends AppCompatActivity {
 
     //RecyclerView and ViewModel
     private RecyclerView recyclerView;
-    private StockAdapter stockAdapter;
+    //private StockAdapter stockAdapter;
+    private StockAdapter2 stockAdapter;
     private StockViewModel viewModel;
     private LiveData<List<Stock>> selectedStocks;
 
@@ -97,7 +99,7 @@ public class StocksActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockViewModel.class);
     }
 
-    private void getItemsFromViewModel(int options, StockAdapter adapter,String query) {
+    private void getItemsFromViewModel(int options, StockAdapter2 adapter,String query) {
 
 
         selectedStocks = viewModel.getAllStock(options,query);
@@ -106,6 +108,7 @@ public class StocksActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Stock> stocks) {
                 adapter.submitList(stocks);
+                recyclerView.scrollToPosition(0);
 
                 if (stocks.size() == 0){
                     imageBackgroung.setVisibility(View.VISIBLE);
@@ -124,7 +127,8 @@ public class StocksActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        stockAdapter = new StockAdapter(this, viewModel);
+        //stockAdapter = new StockAdapter(this, viewModel);
+        stockAdapter = new StockAdapter2(this);
         recyclerView.setAdapter(stockAdapter);
 
 
@@ -135,7 +139,9 @@ public class StocksActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME,stockAdapter,query.toUpperCase() + "%");
+
+                return true;
             }
 
             @Override
@@ -217,6 +223,17 @@ public class StocksActivity extends AppCompatActivity {
             Stock stock = (Stock) data.getExtras().get(ADD_STOCK_KEY);
             viewModel.insert(stock);
 
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (searchView.isSearchOpen()){
+            searchView.closeSearch();
+        }else {
+            super.onBackPressed();
         }
 
     }

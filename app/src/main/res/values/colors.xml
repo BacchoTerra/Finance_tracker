@@ -23,4 +23,5 @@
 
     <color name="profit_color">#0f9c58</color>
     <color name="deficit_color">#d60c3a</color>
+    <color name="transparent_black">#59000000</color>
 </resources>

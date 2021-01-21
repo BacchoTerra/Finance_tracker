@@ -8,7 +8,7 @@
     tools:context=".view.StocksActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/activity_stock_appBarLayour"
+        android:id="@+id/activity_stock_appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayour" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_stock_recycler_view"
@@ -61,8 +61,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayour"
-        tools:listitem="@layout/row_stock" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayout"
+        tools:listitem="@layout/row_stock_2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_stock_fab_add"

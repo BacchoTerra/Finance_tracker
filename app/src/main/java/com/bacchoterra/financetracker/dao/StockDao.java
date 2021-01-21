@@ -26,7 +26,7 @@ public interface StockDao {
     @Query("DELETE FROM stock_table")
     void deleteAllFromRendaVariavelTable ();
 
-    @Query("SELECT * FROM stock_table")
+    @Query("SELECT * FROM stock_table ORDER BY initialTimestamp")
     LiveData<List<Stock>> selectAllFromRendaVariavel();
 
     @Query("SELECT * FROM stock_table WHERE isFinished = 0")
