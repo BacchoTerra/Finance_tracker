@@ -21,15 +21,13 @@ import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.adapter.StockAdapter;
-import com.bacchoterra.financetracker.adapter.StockAdapter2;
 import com.bacchoterra.financetracker.model.Stock;
+import com.bacchoterra.financetracker.tools.SimpleRecyclerSwipe;
 import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StocksActivity extends AppCompatActivity {
 
@@ -42,14 +40,15 @@ public class StocksActivity extends AppCompatActivity {
 
     //RecyclerView and ViewModel
     private RecyclerView recyclerView;
-    //private StockAdapter stockAdapter;
-    private StockAdapter2 stockAdapter;
+    private StockAdapter stockAdapter;
     private StockViewModel viewModel;
     private LiveData<List<Stock>> selectedStocks;
 
     //ActivityResult code
     public static final int ADD_STOCK = 100;
+    public static final int SHOW_STOCK = 200;
     public static final String ADD_STOCK_KEY = "add_stock_key";
+    public static final String SHOW_STOCK_KEY = "show_stock_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +88,6 @@ public class StocksActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_arrow_back_24);
 
 
     }
@@ -99,7 +97,7 @@ public class StocksActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockViewModel.class);
     }
 
-    private void getItemsFromViewModel(int options, StockAdapter2 adapter,String query) {
+    private void getItemsFromViewModel(int options, StockAdapter adapter, String query) {
 
 
         selectedStocks = viewModel.getAllStock(options,query);
@@ -127,9 +125,21 @@ public class StocksActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        //stockAdapter = new StockAdapter(this, viewModel);
-        stockAdapter = new StockAdapter2(this);
+        stockAdapter = new StockAdapter(this);
         recyclerView.setAdapter(stockAdapter);
+
+        SimpleRecyclerSwipe swipe = new SimpleRecyclerSwipe(recyclerView);
+
+
+        swipe.swipe(new SimpleRecyclerSwipe.SwipeListener() {
+            @Override
+            public void onSwiped(int position) {
+                stockAdapter.notifyItemChanged(position);
+                Intent intent = new Intent(StocksActivity.this,ShowStockActivity.class);
+                intent.putExtra(SHOW_STOCK_KEY,stockAdapter.getStock(position));
+                startActivityForResult(intent,100);
+            }
+        });
 
 
     }

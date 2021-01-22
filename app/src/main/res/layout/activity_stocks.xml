@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayout"
-        tools:listitem="@layout/row_stock_2" />
+        tools:listitem="@layout/row_stock" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_stock_fab_add"

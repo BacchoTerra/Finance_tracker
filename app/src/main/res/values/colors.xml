@@ -12,6 +12,7 @@
     <color name="renda_fixa">#6987D5</color>
     <color name="fundos">#445BC1</color>
     <color name="renda_variavel">#2C43B8</color>
+    <color name="renda_variavel_transparent">#402C43B8</color>
     <color name="previdencia_privada">#1727AE</color>
     <color name="toolbar_color">#FFFFFF</color>
     <color name="toolbar_text_color">#000000</color>

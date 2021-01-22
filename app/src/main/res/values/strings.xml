@@ -53,4 +53,10 @@
     <string name="todas_acoes">Todas</string>
     <string name="n_o_encontramos_nenhum_item">Não encontramos nenhum item..</string>
     <string name="sucesso">Sucesso</string>
+    <string name="total_gasto_2">Total gasto</string>
+    <string name="preco_medio">Preço médio: </string>
+    <string name="tecnica_utilizada">"Técnica utilizada: "</string>
+    <string name="primeira_compra">Primeira compra: </string>
+    <string name="lucro">Lucro</string>
+    <string name="operacao_aberta">Operação aberta</string>
 </resources>
