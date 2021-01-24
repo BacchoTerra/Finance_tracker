@@ -10,7 +10,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="145dp"
-        android:layout_height="215dp"
+        android:layout_height="200dp"
         android:background="@drawable/shape_row_stock_information"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

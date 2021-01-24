@@ -235,6 +235,15 @@ public class StocksActivity extends AppCompatActivity {
 
         }
 
+        if (requestCode == SHOW_STOCK && resultCode == RESULT_OK){
+
+            assert data != null && data.getExtras() != null;
+            Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
+            viewModel.update(stock);
+            stockAdapter.notifyDataSetChanged();
+
+        }
+
     }
 
     @Override

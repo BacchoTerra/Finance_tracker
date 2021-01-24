@@ -1,14 +1,22 @@
 package com.bacchoterra.financetracker.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.adapter.StockInformationAdapter;
@@ -30,9 +38,18 @@ public class ShowStockActivity extends AppCompatActivity {
     private TextView txtStockState;
     private RecyclerView recyclerView;
 
+    private Button btnFinalize;
+    private Button btnExclude;
+    private Button btnAddStocks;
+    private Button btnRemoveStocks;
+
     //For RecyclerView
     private List<StockInformation> list = new ArrayList<>();
     private StockInformationAdapter adapter;
+
+    //AlertDialog
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder builder;
 
 
     //Model
@@ -56,6 +73,14 @@ public class ShowStockActivity extends AppCompatActivity {
         txtStockState = findViewById(R.id.activity_show_stock_txt_state);
         recyclerView = findViewById(R.id.activity_show_stock_recycler_view);
 
+        btnFinalize = findViewById(R.id.activity_show_stock_btn_finalize);
+        btnFinalize.setBackgroundTintList(ColorStateList.valueOf(ResourcesCompat.getColor(getResources(),R.color.my_light_blue,null)));
+        btnExclude = findViewById(R.id.activity_show_stock_btn_exclude);
+        btnExclude.setBackgroundTintList(ColorStateList.valueOf(ResourcesCompat.getColor(getResources(),R.color.my_dark_blue,null)));
+        btnAddStocks = findViewById(R.id.activity_show_stock_btn_add_stocks);
+        btnAddStocks.setBackgroundTintList(ColorStateList.valueOf(ResourcesCompat.getColor(getResources(),R.color.my_dark_blue,null)));
+        btnRemoveStocks = findViewById(R.id.activity_show_stock_btn_remove_stocks);
+        btnRemoveStocks.setBackgroundTintList(ColorStateList.valueOf(ResourcesCompat.getColor(getResources(),R.color.my_dark_blue,null)));
 
     }
 
@@ -76,6 +101,7 @@ public class ShowStockActivity extends AppCompatActivity {
         assert bundle != null;
         stock = (Stock) bundle.get(StocksActivity.SHOW_STOCK_KEY);
 
+        assert stock != null;
         bindStock(stock);
 
 
@@ -89,7 +115,7 @@ public class ShowStockActivity extends AppCompatActivity {
         txtTotalPrice.setText(totalPrice);
 
         if (!stock.isFinished()){
-            txtStockState.setText(getString(R.string.operacao_aberta));
+            txtStockState.setText(null);
             txtStockState.setCompoundDrawablesWithIntrinsicBounds(0,0, R.drawable.ic_baseline_lock_24,0);
         }else {
             txtStockState.setText(String.valueOf(stock.getProfit()));
