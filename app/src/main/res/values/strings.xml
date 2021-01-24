@@ -59,4 +59,7 @@
     <string name="primeira_compra">Primeira compra: </string>
     <string name="lucro">Lucro</string>
     <string name="operacao_aberta">Operação aberta</string>
+    <string name="informa_es_adicionais">Informações adicionais</string>
+    <string name="total_investido">Total investido</string>
+    <string name="item_nao_definido">Item não definido</string>
 </resources>
