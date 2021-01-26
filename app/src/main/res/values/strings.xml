@@ -66,4 +66,10 @@
     <string name="adicionar_a_o_es">Adicionar açoões</string>
     <string name="remover_a_es">Remover ações</string>
     <string name="finalizar_opera_o_content">Deseja realmente finalizar a operação? Essa ação não poderá ser desfeita.</string>
+    <string name="valor_m_dio_de_suas_a_es">Valor médio de suas ações</string>
+    <string name="varia_o_total">Variação total</string>
+    <string name="valor_atual">Valor atual</string>
+    <string name="detalhes">Detalhes</string>
+    <string name="lucro_previsto">Lucro previsto</string>
+    <string name="informa_es">Informações</string>
 </resources>

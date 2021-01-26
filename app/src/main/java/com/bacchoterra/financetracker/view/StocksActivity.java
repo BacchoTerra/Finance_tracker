@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +68,7 @@ public class StocksActivity extends AppCompatActivity {
         initRecyclerView();
         getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter,null);
         setSearchViewListener();
+
     }
 
     private void init() {

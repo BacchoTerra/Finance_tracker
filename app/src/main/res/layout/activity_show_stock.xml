@@ -19,150 +19,257 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/activity_show_stock_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/activity_show_stock_txt_stock_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="ITUB4" />
-
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_height="@dimen/custom_toolbar_height"
+            android:background="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/activity_show_stock_txt_total_invested_fixed"
+        android:id="@+id/activity_show_stock_txt_stock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_app_bar_layout"
+        tools:text="OIBR3" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_first_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_stock_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_stock_name"
+        tools:text="22/10/2020" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#457"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_first_date" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/total_investido"
-        android:textColor="#AEBAD6"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_app_bar_layout" />
+        android:fontFamily="@font/roboto"
+        android:text="@string/valor_m_dio_de_suas_a_es"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_first_date"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/activity_show_stock_txt_total_invested_value"
-        android:layout_width="wrap_content"
+        android:id="@+id/activity_show_stock_txt_average_price"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
-        android:textColor="#1c294d"
-        android:textSize="36sp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/black"
+        android:textSize="22sp"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_invested_fixed"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_total_invested_fixed"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_total_invested_fixed"
-        tools:text="R$ 7291.00" />
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock1"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock1"
+        tools:text="R$ 10,00" />
 
     <TextView
-        android:id="@+id/activity_show_stock_txt_state"
+        android:id="@+id/activity_show_stock_txt_mock2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/varia_o_total"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_variation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawablePadding="6dp"
-        android:textColor="#AEBAD6"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/ic_baseline_lock_24"
-        app:drawableTint="@color/light_text_color"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_invested_value"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_total_invested_value"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_total_invested_value"
-        tools:text="" />
+        android:fontFamily="@font/roboto"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock2"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock2"
+        tools:text="+ 4,00 %"
+        tools:textColor="@color/profit_color" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_show_stock_recycler_view"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/valor_atual"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock2"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_variation" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_current_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock3"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock3"
+        tools:text="R$ 10,40" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/view_backgroung"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_state"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_stock_information" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_current_value" />
 
-    <Button
-        android:id="@+id/activity_show_stock_btn_finalize"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/shape_btn_stock_options"
-        android:padding="0dp"
-        android:text="@string/finalizar_opera_o"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toTopOf="@+id/activity_show_stock_btn_add_stocks"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/activity_show_stock_btn_exclude"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/shape_btn_stock_options"
-        android:text="@string/excluir"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_finalize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_finalize" />
-
-    <Button
-        android:id="@+id/activity_show_stock_btn_add_stocks"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/shape_btn_stock_options"
-        android:text="@string/adicionar_a_o_es"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/activity_show_stock_btn_remove_stocks"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/shape_btn_stock_options"
-        android:text="@string/remover_a_es"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_add_stocks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_add_stocks" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        android:layout_marginStart="8dp"
+        android:text="@string/detalhes"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.65" />
+        android:layout_marginTop="16dp"
+        android:text="@string/quantidade"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock4"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/total_gasto"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock5"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock5" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_total_spent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_quantity"
+        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_mock6"
+        tools:text="R$ 10,00" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/lucro_previsto"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock6"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock6" />
+
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_profit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_spent"
+        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_mock7"
+        tools:text="3,40" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/view_backgroung"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock7" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/informa_es"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/tecnica_utilizada"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_technique"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        tools:text="Medias moveis (17,34)"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock8"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock8" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_mock9"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/tempo_estimado"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock8"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_technique" />
+
+    <TextView
+        android:id="@+id/activity_show_stock_txt_expected_time"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="8 meses"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_technique"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock9" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

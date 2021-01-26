@@ -8,6 +8,8 @@
     <dimen name="card_default_radius">10dp</dimen>
     <dimen name="card_default_elevation">4dp</dimen>
 
+    <dimen name="custom_toolbar_height">46dp</dimen>
+
 
 
 </resources>
