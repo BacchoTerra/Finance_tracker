@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
@@ -141,7 +140,7 @@ public class AddStockActivity extends AppCompatActivity {
 
         Stock stock = new Stock();
         stock.setStockName(editStockName.getText().toString().toUpperCase());
-        stock.setInitialPrice(Float.parseFloat(editPrice.getText().toString()));
+        stock.setAveragePrice(Float.parseFloat(editPrice.getText().toString()));
         stock.setQuantity(Integer.parseInt(editQuantity.getText().toString()));
         stock.setTotalSpent(Float.parseFloat(txtTotalPrice.getText().toString().replace(',', '.')));
 

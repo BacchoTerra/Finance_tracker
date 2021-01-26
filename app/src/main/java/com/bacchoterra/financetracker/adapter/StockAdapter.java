@@ -40,7 +40,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
         @Override
         public boolean areContentsTheSame(@NonNull Stock oldItem, @NonNull Stock newItem) {
-            return oldItem.getStockName().equals(newItem.getStockName()) && oldItem.getExpectedTimeInvested().equals(newItem.getExpectedTimeInvested()) && oldItem.getFinalTimestamp() == newItem.getFinalTimestamp() && oldItem.getInitialPrice() == newItem.getInitialPrice() && oldItem.getInitialTimestamp() == newItem.getInitialTimestamp() && oldItem.getProfit() == newItem.getProfit() && oldItem.getQuantity() == newItem.getQuantity() && oldItem.getTechniqueUsed().equals(newItem.getTechniqueUsed()) && oldItem.getTotalSpent() == newItem.getTotalSpent();
+            return oldItem.getStockName().equals(newItem.getStockName()) && oldItem.getExpectedTimeInvested().equals(newItem.getExpectedTimeInvested()) && oldItem.getFinalTimestamp() == newItem.getFinalTimestamp() && oldItem.getAveragePrice() == newItem.getAveragePrice() && oldItem.getInitialTimestamp() == newItem.getInitialTimestamp() && oldItem.getProfit() == newItem.getProfit() && oldItem.getQuantity() == newItem.getQuantity() && oldItem.getTechniqueUsed().equals(newItem.getTechniqueUsed()) && oldItem.getTotalSpent() == newItem.getTotalSpent();
         }
     };
 
@@ -106,7 +106,7 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         holder.txtDate.setText(getDate(stock));
         holder.txtQuantity.setText(String.valueOf(stock.getQuantity()));
 
-        String initialPrice = moneySymbol + String.valueOf(stock.getInitialPrice()).replace('.', ',');
+        String initialPrice = moneySymbol + String.valueOf(stock.getAveragePrice()).replace('.', ',');
         String totalSpend = moneySymbol + String.valueOf(stock.getTotalSpent()).replace('.', ',');
 
         holder.txtInitialPrice.setText(initialPrice);

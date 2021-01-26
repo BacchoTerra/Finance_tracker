@@ -45,10 +45,15 @@ public class StocksActivity extends AppCompatActivity {
     private LiveData<List<Stock>> selectedStocks;
 
     //ActivityResult code
-    public static final int ADD_STOCK = 100;
-    public static final int SHOW_STOCK = 200;
+    public static final int ADD_STOCK_CODE = 100;
+    public static final int SHOW_STOCK_CODE = 200;
     public static final String ADD_STOCK_KEY = "add_stock_key";
     public static final String SHOW_STOCK_KEY = "show_stock_key";
+
+    //ActivityResult switch statement
+    public static int option;
+    public static final int EXCLUDE_STOCK = 0;
+    public static final int FINALIZE_STOCK = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +83,7 @@ public class StocksActivity extends AppCompatActivity {
     private void initClickListener() {
 
         fabAddStock.setOnClickListener(view ->
-                startActivityForResult(new Intent(StocksActivity.this, AddStockActivity.class), ADD_STOCK));
+                startActivityForResult(new Intent(StocksActivity.this, AddStockActivity.class), ADD_STOCK_CODE));
 
     }
 
@@ -137,7 +142,7 @@ public class StocksActivity extends AppCompatActivity {
                 stockAdapter.notifyItemChanged(position);
                 Intent intent = new Intent(StocksActivity.this,ShowStockActivity.class);
                 intent.putExtra(SHOW_STOCK_KEY,stockAdapter.getStock(position));
-                startActivityForResult(intent,100);
+                startActivityForResult(intent, SHOW_STOCK_CODE);
             }
         });
 
@@ -226,7 +231,7 @@ public class StocksActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ADD_STOCK && resultCode == RESULT_OK) {
+        if (requestCode == ADD_STOCK_CODE && resultCode == RESULT_OK) {
 
 
             assert data != null && data.getExtras() != null;
@@ -235,14 +240,30 @@ public class StocksActivity extends AppCompatActivity {
 
         }
 
-        if (requestCode == SHOW_STOCK && resultCode == RESULT_OK){
+        if (requestCode == SHOW_STOCK_CODE && resultCode == RESULT_OK){
 
             assert data != null && data.getExtras() != null;
-            Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
-            viewModel.update(stock);
-            stockAdapter.notifyDataSetChanged();
+            handleResultForShowActivity(data);
 
         }
+
+    }
+
+    public void handleResultForShowActivity(Intent data){
+        Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
+
+
+        switch (option){
+            case FINALIZE_STOCK:
+                viewModel.update(stock);
+                break;
+            case EXCLUDE_STOCK:
+                viewModel.delete(stock);
+                break;
+
+        }
+
+        stockAdapter.notifyDataSetChanged();
 
     }
 
