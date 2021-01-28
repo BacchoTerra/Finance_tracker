@@ -2,40 +2,49 @@ package com.bacchoterra.financetracker.model;
 
 public class StockInformation {
 
-    private String stockInfoTitle;
-    private String stockInfoContent;
-    private int infoDrawable;
+    private boolean user_displayable;
+    private boolean success;
+    private int status;
+    private Data data;
+    private String error_message;
 
-    public StockInformation(String stockInfoField, String stockInfoContent, int infoDrawable) {
-        this.stockInfoTitle = stockInfoField;
-        this.stockInfoContent = stockInfoContent;
-        this.infoDrawable = infoDrawable;
+    public boolean isUser_displayable() {
+        return user_displayable;
     }
 
-    public StockInformation() {
+    public void setUser_displayable(boolean user_displayable) {
+        this.user_displayable = user_displayable;
     }
 
-    public String getStockInfoTitle() {
-        return stockInfoTitle;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStockInfoTitle(String stockInfoTitle) {
-        this.stockInfoTitle = stockInfoTitle;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public String getStockInfoContent() {
-        return stockInfoContent;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStockInfoContent(String stockInfoContent) {
-        this.stockInfoContent = stockInfoContent;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public int getInfoDrawable() {
-        return infoDrawable;
+    public Data getData() {
+        return data;
     }
 
-    public void setInfoDrawable(int infoDrawable) {
-        this.infoDrawable = infoDrawable;
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public String getError_message() {
+        return error_message;
+    }
+
+    public void setError_message(String error_message) {
+        this.error_message = error_message;
     }
 }

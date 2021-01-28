@@ -72,4 +72,11 @@
     <string name="detalhes">Detalhes</string>
     <string name="lucro_previsto">Lucro previsto</string>
     <string name="informa_es">Informações</string>
+    <string name="variacao_dia">Variação do dia</string>
+    <string name="varia_o_m_s">Variação mês</string>
+    <string name="varia_o_do_ano">Variação do ano</string>
+    <string name="mercado_aberto">Mercado aberto</string>
+    <string name="mercado_fechado">Mercado fechado</string>
+    <string name="minimo_do_dia">Mínima do dia</string>
+    <string name="maxima_do_dia">Máxima do dia</string>
 </resources>

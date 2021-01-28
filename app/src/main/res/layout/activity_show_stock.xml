@@ -29,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto"
         android:textColor="@color/black"
         android:textSize="22sp"
@@ -37,239 +38,309 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_app_bar_layout"
         tools:text="OIBR3" />
 
+
     <TextView
-        android:id="@+id/activity_show_stock_txt_first_date"
+        android:id="@+id/activity_show_stock_txt_market_status"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
+        android:layout_height="19dp"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="true"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_stock_name"
         app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_stock_name"
-        tools:text="22/10/2020" />
+        tools:text="@string/mercado_aberto" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="#457"
+        android:layout_marginTop="8dp"
+        android:background="@color/view_backgroung"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_first_date" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_market_status" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/valor_m_dio_de_suas_a_es"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_first_date"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <TextView
-        android:id="@+id/activity_show_stock_txt_average_price"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock1"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock1"
-        tools:text="R$ 10,00" />
-
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/varia_o_total"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <TextView
-        android:id="@+id/activity_show_stock_txt_variation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
-        android:textSize="22sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock2"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock2"
-        tools:text="+ 4,00 %"
-        tools:textColor="@color/profit_color" />
-
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/valor_atual"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock2"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_variation" />
-
-    <TextView
-        android:id="@+id/activity_show_stock_txt_current_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_mock3"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock3"
-        tools:text="R$ 10,40" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/view_backgroung"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_current_value" />
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/detalhes"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/quantidade"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock4"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_average_price_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/valor_m_dio_de_suas_a_es"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3"
-        tools:text="1" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_average_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_average_price_mock"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_average_price_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_average_price_mock"
+                tools:text="R$ 10,00" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/total_gasto"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock5"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock5" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_current_value_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/valor_atual"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_average_price_mock" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_total_spent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_quantity"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_mock6"
-        tools:text="R$ 10,00" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_current_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:textSize="22sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_current_value_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_current_value_mock"
+                tools:text="R$ 10,40" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/lucro_previsto"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock6"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock6" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_variation_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/varia_o_total"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_current_value" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_total_variation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_variation_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_variation_mock"
+                tools:text="+ 4,00 %"
+                tools:textColor="@color/profit_color" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/view_backgroung"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_total_variation" />
 
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_profit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_spent"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_mock7"
-        tools:text="3,40" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/detalhes"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view3"
+                app:layout_constraintStart_toStartOf="@+id/view3"
+                app:layout_constraintTop_toTopOf="@+id/view3" />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/view_backgroung"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock7" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_date_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/primeira_compra"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_details"
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/informa_es"
-        app:layout_constraintBottom_toBottomOf="@+id/view4"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/view4"
-        app:layout_constraintTop_toTopOf="@+id/view4" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_first_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_quantity"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_date_mock"
+                tools:text="20/12/2012" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/tecnica_utilizada"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_quantity_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/quantidade"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_date_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_date_mock" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_technique"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        tools:text="Medias moveis (17,34)"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock8"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock8" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_quantity_mock"
+                tools:text="1" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_mock9"
-        android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/tempo_estimado"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_mock8"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_technique" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_total_invested_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/total_investido"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_quantity_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_quantity_mock" />
 
-    <TextView
-        android:id="@+id/activity_show_stock_txt_expected_time"
-        android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="8 meses"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_technique"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_mock9" />
+            <TextView
+                android:id="@+id/activity_show_stock_txt_total_spent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_quantity"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_total_invested_mock"
+                tools:text="R$ 10,00" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_profit_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/lucro_previsto"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_total_invested_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_total_invested_mock" />
+
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_spent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_profit_mock"
+                tools:text="3,40" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/view_backgroung"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_profit_mock" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/informa_es"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view4"
+                app:layout_constraintStart_toStartOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/view4" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_day_variation_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/variacao_dia"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_profit_mock"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_day_variation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_day_variation_mock"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_profit"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_day_variation_mock"
+                tools:text="23,00%" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_max_day_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/maxima_do_dia"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_day_variation_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_day_variation_mock" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_min_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_day_variation"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_max_day_mock"
+                tools:text="23,00%" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_min_day_mock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/minimo_do_dia"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_max_day_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_max_day_mock" />
+
+            <TextView
+                android:id="@+id/activity_show_stock_txt_max_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_min_day"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_min_day_mock"
+                tools:text="23,00%" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
