@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_show_stock_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -93,7 +94,7 @@
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
                 android:textSize="22sp"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_average_price_mock"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_average_price_mock"
@@ -117,10 +118,22 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
                 android:textSize="22sp"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_current_value_mock"
                 app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_current_value_mock"
                 tools:text="R$ 10,40" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/activity_show_stock_progress_current_value"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:SpinKit_Color="@color/design_default_color_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_current_value"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_current_value_mock"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_current_value_mock"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_current_value" />
+
 
             <TextView
                 android:id="@+id/activity_show_stock_txt_variation_mock"
@@ -138,13 +151,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
                 android:textSize="22sp"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_variation_mock"
                 app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_variation_mock"
                 tools:text="+ 4,00 %"
                 tools:textColor="@color/profit_color" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/activity_show_stock_progress_total_variation"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:SpinKit_Color="@color/design_default_color_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_total_variation"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_variation_mock"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_progress_current_value"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_total_variation" />
 
             <View
                 android:id="@+id/view3"
@@ -296,6 +321,17 @@
                 app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_day_variation_mock"
                 tools:text="23,00%" />
 
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/activity_show_stock_progress_day_var"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                app:SpinKit_Color="@color/design_default_color_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_day_variation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_day_variation" />
+
             <TextView
                 android:id="@+id/activity_show_stock_txt_max_day_mock"
                 android:layout_width="wrap_content"
@@ -307,7 +343,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_day_variation_mock" />
 
             <TextView
-                android:id="@+id/activity_show_stock_txt_min_day"
+                android:id="@+id/activity_show_stock_txt_max_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -315,6 +351,18 @@
                 app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_day_variation"
                 app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_max_day_mock"
                 tools:text="23,00%" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/activity_show_stock_progress_max_day"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                app:SpinKit_Color="@color/design_default_color_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_max_day"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_max_day" />
+
 
             <TextView
                 android:id="@+id/activity_show_stock_txt_min_day_mock"
@@ -327,14 +375,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_max_day_mock" />
 
             <TextView
-                android:id="@+id/activity_show_stock_txt_max_day"
+                android:id="@+id/activity_show_stock_txt_min_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_min_day"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_max_day"
                 app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_min_day_mock"
                 tools:text="23,00%" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/activity_show_stock_progress_min_day"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                app:SpinKit_Color="@color/design_default_color_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_min_day"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_min_day" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

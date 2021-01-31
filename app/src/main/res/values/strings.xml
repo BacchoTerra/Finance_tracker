@@ -79,4 +79,10 @@
     <string name="mercado_fechado">Mercado fechado</string>
     <string name="minimo_do_dia">Mínima do dia</string>
     <string name="maxima_do_dia">Máxima do dia</string>
+    <string name="sem_internet">Sem internet</string>
+    <string name="conectar">Conectar</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+    <string name="erro_no_servidor">Erro no nosso servidor</string>
+    <string name="erro_desconhecido">Erro desconhecido</string>
+    <string name="ativo_nao_encontrado">Ativo não encontrado</string>
 </resources>

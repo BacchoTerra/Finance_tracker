@@ -20,6 +20,9 @@ public class FetchStockInformation {
     //Context
     private Context context;
 
+    //Constants
+    public static final int STATUS_SUCCESS = 200;
+
     //Retrofit stuff
     private Retrofit retrofit;
     private Call<StockInformation> call;
@@ -51,10 +54,9 @@ public class FetchStockInformation {
 
     }
 
-    //TODO: Handle each of those shits the right way...
+    //TODO: Handle each of those shits the right way...like if the status of the StockInformation is 200...this is important
     public void makeCall(String stockName, OnStockFetched listener) {
 
-        if (hasInternetConnection()) {
 
 
             call = stockApi.getStockInformation(stockName);
@@ -63,22 +65,20 @@ public class FetchStockInformation {
                 public void onResponse(Call<StockInformation> call, Response<StockInformation> response) {
 
                     if (response.isSuccessful()) {
-
                         listener.onSuccess(response.body());
 
+
+                    } else {
+                        listener.onBackEndFailure(response.code());
                     }
 
                 }
 
                 @Override
                 public void onFailure(Call<StockInformation> call, Throwable t) {
-                    listener.onFailure(t);
+                    listener.onIntrinsicFailure(t);
                 }
             });
-
-        } else {
-            listener.onInternetFailure();
-        }
 
     }
 
@@ -86,9 +86,9 @@ public class FetchStockInformation {
 
         void onSuccess(StockInformation stockInformation);
 
-        void onFailure(Throwable t);
+        void onIntrinsicFailure(Throwable t);
 
-        void onInternetFailure();
+        void onBackEndFailure(int code);
     }
 
 }

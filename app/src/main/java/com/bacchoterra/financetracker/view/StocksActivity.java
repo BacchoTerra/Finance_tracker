@@ -66,7 +66,7 @@ public class StocksActivity extends AppCompatActivity {
         initClickListener();
         initViewModel();
         initRecyclerView();
-        getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter,null);
+        getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter, null);
         setSearchViewListener();
 
     }
@@ -108,7 +108,7 @@ public class StocksActivity extends AppCompatActivity {
     private void getItemsFromViewModel(int options, StockAdapter adapter, String query) {
 
 
-        selectedStocks = viewModel.getAllStock(options,query);
+        selectedStocks = viewModel.getAllStock(options, query);
 
         selectedStocks.observe(this, new Observer<List<Stock>>() {
             @Override
@@ -116,10 +116,10 @@ public class StocksActivity extends AppCompatActivity {
                 adapter.submitList(stocks);
                 recyclerView.scrollToPosition(0);
 
-                if (stocks.size() == 0){
+                if (stocks.size() == 0) {
                     imageBackgroung.setVisibility(View.VISIBLE);
                     txtNoItem.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     imageBackgroung.setVisibility(View.GONE);
                     txtNoItem.setVisibility(View.GONE);
                 }
@@ -143,8 +143,8 @@ public class StocksActivity extends AppCompatActivity {
             @Override
             public void onSwiped(int position) {
                 stockAdapter.notifyItemChanged(position);
-                Intent intent = new Intent(StocksActivity.this,ShowStockActivity.class);
-                intent.putExtra(SHOW_STOCK_KEY,stockAdapter.getStock(position));
+                Intent intent = new Intent(StocksActivity.this, ShowStockActivity.class);
+                intent.putExtra(SHOW_STOCK_KEY, stockAdapter.getStock(position));
                 startActivityForResult(intent, SHOW_STOCK_CODE);
             }
         });
@@ -152,12 +152,12 @@ public class StocksActivity extends AppCompatActivity {
 
     }
 
-    private void setSearchViewListener(){
+    private void setSearchViewListener() {
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME,stockAdapter,query.toUpperCase() + "%");
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME, stockAdapter, query.toUpperCase() + "%");
 
                 return true;
             }
@@ -165,11 +165,11 @@ public class StocksActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                if (newText.length() >0){
-                    getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME,stockAdapter,newText.toUpperCase() + "%");
+                if (newText.length() > 0) {
+                    getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_NAME, stockAdapter, newText.toUpperCase() + "%");
                     return true;
-                }else {
-                    getItemsFromViewModel(StockViewModel.SELECT_ALL,stockAdapter,null);
+                } else {
+                    getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter, null);
                 }
 
                 return false;
@@ -198,23 +198,23 @@ public class StocksActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_toolbar_all_stock:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter,null);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL, stockAdapter, null);
                 break;
 
             case R.id.menu_toolbar_total_price:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_TOTAL_SPENT,stockAdapter,null);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_TOTAL_SPENT, stockAdapter, null);
                 break;
 
             case R.id.menu_toolbar_stock_price:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_INITIAL_PRICE,stockAdapter,null);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_BY_INITIAL_PRICE, stockAdapter, null);
                 break;
 
             case R.id.menu_toolbar_finalized:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_FINISHED, stockAdapter,null);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_FINISHED, stockAdapter, null);
                 break;
 
             case R.id.menu_toolbar_opened:
-                getItemsFromViewModel(StockViewModel.SELECT_ALL_OPENED,stockAdapter,null);
+                getItemsFromViewModel(StockViewModel.SELECT_ALL_OPENED, stockAdapter, null);
 
 
         }
@@ -243,7 +243,7 @@ public class StocksActivity extends AppCompatActivity {
 
         }
 
-        if (requestCode == SHOW_STOCK_CODE && resultCode == RESULT_OK){
+        if (requestCode == SHOW_STOCK_CODE && resultCode == RESULT_OK) {
 
             assert data != null && data.getExtras() != null;
             handleResultForShowActivity(data);
@@ -252,11 +252,11 @@ public class StocksActivity extends AppCompatActivity {
 
     }
 
-    public void handleResultForShowActivity(Intent data){
+    public void handleResultForShowActivity(Intent data) {
         Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
 
 
-        switch (option){
+        switch (option) {
             case FINALIZE_STOCK:
                 viewModel.update(stock);
                 break;
@@ -273,9 +273,9 @@ public class StocksActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (searchView.isSearchOpen()){
+        if (searchView.isSearchOpen()) {
             searchView.closeSearch();
-        }else {
+        } else {
             super.onBackPressed();
         }
 

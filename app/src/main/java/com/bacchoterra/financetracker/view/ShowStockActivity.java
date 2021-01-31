@@ -2,18 +2,23 @@ package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.model.StockInformation;
 import com.bacchoterra.financetracker.tools.FetchStockInformation;
+import com.github.ybq.android.spinkit.SpinKitView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +28,7 @@ import java.util.Locale;
 public class ShowStockActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Layout components
+    private ConstraintLayout rootLayout;
     private Toolbar toolbar;
     private TextView txtStockName;
     private TextView txtInitialDate;
@@ -36,21 +42,29 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     private TextView txtDayVariation;
     private TextView txtMaxDay;
     private TextView txtMinDay;
+    private SpinKitView progressCurrentValue;
+    private SpinKitView progressTotalVariation;
+    private SpinKitView progressDayVariation;
+    private SpinKitView progressMaxDay;
+    private SpinKitView progressMinDay;
 
     //Model
     private Stock stock;
 
     //Calendar
-    Calendar calendar;
+    private Calendar calendar;
+
+    //Formaters
+    private DecimalFormat decimalFormat;
 
     //REST
-    public StockInformation information;
     public FetchStockInformation fetchStockInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_stock);
+        decimalFormat = new DecimalFormat("0.00");
         init();
         initToolbar();
         retrieveStock();
@@ -61,6 +75,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void init() {
+        rootLayout = findViewById(R.id.activity_show_stock_root_layout);
         toolbar = findViewById(R.id.activity_show_stock_toolbar);
         txtStockName = findViewById(R.id.activity_show_stock_txt_stock_name);
         txtInitialDate = findViewById(R.id.activity_show_stock_txt_first_date);
@@ -74,6 +89,11 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         txtDayVariation = findViewById(R.id.activity_show_stock_txt_day_variation);
         txtMaxDay = findViewById(R.id.activity_show_stock_txt_max_day);
         txtMinDay = findViewById(R.id.activity_show_stock_txt_min_day);
+        progressCurrentValue = findViewById(R.id.activity_show_stock_progress_current_value);
+        progressTotalVariation = findViewById(R.id.activity_show_stock_progress_total_variation);
+        progressDayVariation = findViewById(R.id.activity_show_stock_progress_day_var);
+        progressMaxDay = findViewById(R.id.activity_show_stock_progress_max_day);
+        progressMinDay = findViewById(R.id.activity_show_stock_progress_min_day);
 
 
     }
@@ -98,12 +118,8 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         txtInitialDate.setText(parseDate());
         txtAveragePrice.setText(parseMoney(stock.getAveragePrice()));
 
-        txtVariation.setText("----");
-        txtCurrentValue.setText("----");
-
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
         txtTotalSpent.setText(calculateTotalSpent());
-        txtProfit.setText("----");
 
 
     }
@@ -128,7 +144,14 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     private String calculateTotalSpent() {
 
-        return getString(R.string.money_symbol) + " " + String.valueOf(stock.getAveragePrice() * stock.getQuantity());
+        return getString(R.string.money_symbol) + " " + decimalFormat.format(stock.getAveragePrice() * stock.getQuantity());
+
+    }
+
+    private float calculateProfit(float currentPrice){
+
+        return (currentPrice * stock.getQuantity()) - (stock.getAveragePrice() * stock.getQuantity());
+
 
     }
 
@@ -142,14 +165,14 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     private String parseMoney(float value) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
         return getString(R.string.money_symbol) + " " + decimalFormat.format(value);
     }
 
     private void fetchStock(String stockName) {
 
-        fetchStockInformation = new FetchStockInformation(this);
+        if (fetchStockInformation == null) {
+            fetchStockInformation = new FetchStockInformation(this);
+        }
 
         fetchStockInformation.makeCall(stockName, new FetchStockInformation.OnStockFetched() {
             @Override
@@ -160,13 +183,24 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                Log.i("Rola", "onFailure: " + t.getMessage());
+            public void onIntrinsicFailure(Throwable t) {
+                showInternetSnackBar();
+                Log.i("RetroError", "onIntrinsicFailure: " + t.getMessage() + " /// " + t.getClass());
+                bindApiValues(null);
             }
 
             @Override
-            public void onInternetFailure() {
-                Log.i("Rola", "onInternetFailure: " + "no net");
+            public void onBackEndFailure(int code) {
+
+
+                if (code == 400) {
+                    showErrorSnackBar(R.string.ativo_nao_encontrado);
+                } else {
+                    showErrorSnackBar(R.string.erro_desconhecido);
+                }
+
+                bindApiValues(null);
+
             }
         });
 
@@ -175,32 +209,76 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     @SuppressLint("SetTextI18n")
     private void bindApiValues(StockInformation information) {
 
-        float currentValue = information.getData().getValor();
-        float max = information.getData().getMaximo_dia();
-        float min = information.getData().getMinimo_dia();
-        float dayVariation = information.getData().getPorcentagem_variacao_dia();
+        if (information != null) {
+            float currentValue = information.getData().getValor();
+            float max = information.getData().getMaximo_dia();
+            float min = information.getData().getMinimo_dia();
+            float dayVariation = information.getData().getPorcentagem_variacao_dia();
 
-        txtCurrentValue.setText(getString(R.string.money_symbol) + " " + currentValue);
-        txtDayVariation.setText(dayVariation + " %");
-        txtMaxDay.setText(getString(R.string.money_symbol) + " " + max);
-        txtMinDay.setText(getString(R.string.money_symbol) + " " + min);
+            txtCurrentValue.setText(getString(R.string.money_symbol) + " " + currentValue);
+            txtDayVariation.setText(dayVariation + " %");
+            txtMaxDay.setText(getString(R.string.money_symbol) + " " + max);
+            txtMinDay.setText(getString(R.string.money_symbol) + " " + min);
 
-        txtVariation.setText(new DecimalFormat("0.00").format(getTotalVariation(currentValue)) + " %");
+            txtVariation.setText(decimalFormat.format(getTotalVariation(currentValue)) + " %");
 
-        if (getTotalVariation(currentValue) > 0) {
-            txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.profit_color, null));
+            txtProfit.setText(decimalFormat.format(calculateProfit(information.getData().getValor())));
+
+            if (getTotalVariation(currentValue) > 0) {
+                txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.profit_color, null));
+            } else {
+                txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.deficit_color, null));
+            }
         } else {
-            txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.deficit_color, null));
+            txtCurrentValue.setText("---");
+            txtDayVariation.setText("---");
+            txtMaxDay.setText("---");
+            txtMinDay.setText("---");
+            txtVariation.setText("---");
+            txtProfit.setText("----");
+
         }
 
-        //TODO: txtProfit needs to be calculated yet..
-        //TODO: add a progress above TextView fields tha has dependence on api values..and set something to them if api doesn't work
+        handleProgressIndicators();
+
 
     }
 
     private float getTotalVariation(float currentValue) {
 
         return (currentValue * 100) / stock.getAveragePrice() - 100;
+
+    }
+
+    private void showInternetSnackBar() {
+
+        Snackbar snackbar = Snackbar.make(toolbar, R.string.sem_internet, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.tentar_novamente, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchStock(stock.getStockName());
+            }
+        });
+        snackbar.show();
+
+
+    }
+
+    private void showErrorSnackBar(int message) {
+
+        Snackbar snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+    }
+
+    private void handleProgressIndicators() {
+
+        progressCurrentValue.setVisibility(View.GONE);
+        progressTotalVariation.setVisibility(View.GONE);
+        progressDayVariation.setVisibility(View.GONE);
+        progressMaxDay.setVisibility(View.GONE);
+        progressMinDay.setVisibility(View.GONE);
+
 
     }
 

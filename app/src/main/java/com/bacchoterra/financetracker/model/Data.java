@@ -3,6 +3,7 @@ package com.bacchoterra.financetracker.model;
 public class Data {
 
     private float valor;
+    private String rotulo;
     private float porcentagem_variacao_dia;
     private float minimo_dia;
     private float maximo_dia;
@@ -37,5 +38,13 @@ public class Data {
 
     public void setMaximo_dia(float maximo_dia) {
         this.maximo_dia = maximo_dia;
+    }
+
+    public String getRotulo() {
+        return rotulo;
+    }
+
+    public void setRotulo(String rotulo) {
+        this.rotulo = rotulo;
     }
 }
