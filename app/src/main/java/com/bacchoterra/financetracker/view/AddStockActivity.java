@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.bacchoterra.financetracker.bottomsheet.HelpStockBottomSheet;
 import com.bacchoterra.financetracker.tools.CheckStockFields;
 import com.santalu.maskara.widget.MaskEditText;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,6 +41,7 @@ public class AddStockActivity extends AppCompatActivity {
     private EditText editEstimatedTime;
     private TextView txtTotalPrice;
     private TextView txtHelp;
+    private AutoCompleteTextView editCorretora;
     private Button btnAdd;
 
     //Help BottomSheet
@@ -51,6 +55,7 @@ public class AddStockActivity extends AppCompatActivity {
         createToolbar();
         setEditDateToCurrentDate();
         calculateTotal();
+        prepareAutoCompleteTextView();
         showHelpBottomSheet();
         sendStockObjectToStockActivity();
     }
@@ -65,6 +70,7 @@ public class AddStockActivity extends AppCompatActivity {
         editTechnique = findViewById(R.id.activity_add_stock_edit_technique);
         editEstimatedTime = findViewById(R.id.activity_add_stock_edit_estimated_time);
         txtTotalPrice = findViewById(R.id.activity_add_stock_txt_total_price_result);
+        editCorretora = findViewById(R.id.activity_add_stock_edit_corretora);
         btnAdd = findViewById(R.id.activity_add_stock_btn_add);
         txtHelp = findViewById(R.id.activity_add_stock_txt_help);
 
@@ -136,6 +142,15 @@ public class AddStockActivity extends AppCompatActivity {
 
     }
 
+    private void prepareAutoCompleteTextView(){
+
+        String [] array = getResources().getStringArray(R.array.correotoras);
+
+        ArrayAdapter <String> arrayAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_dropdown_item_1line,array);
+        editCorretora.setAdapter(arrayAdapter);
+
+    }
+
     private Stock createStock() {
 
         Stock stock = new Stock();
@@ -164,6 +179,10 @@ public class AddStockActivity extends AppCompatActivity {
 
         if (!editEstimatedTime.getText().toString().isEmpty()){
             stock.setExpectedTimeInvested(editEstimatedTime.getText().toString());
+        }
+
+        if (!editCorretora.getText().toString().isEmpty()){
+            stock.setCorretora(editCorretora.getText().toString());
         }
 
 

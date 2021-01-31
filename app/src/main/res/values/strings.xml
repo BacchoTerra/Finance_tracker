@@ -85,4 +85,40 @@
     <string name="erro_no_servidor">Erro no nosso servidor</string>
     <string name="erro_desconhecido">Erro desconhecido</string>
     <string name="ativo_nao_encontrado">Ativo não encontrado</string>
+    <string name="corretora_opcional">Corretora (Opcional)</string>
+
+    <string-array name="correotoras">
+        <item>Ágora</item>
+        <item>Ativa</item>
+        <item>Banrisul Corretora</item>
+        <item>BTG Pactual</item>
+        <item>C6 Bank</item>
+        <item>Citibank</item>
+        <item>Clear Corretora</item>
+        <item>CM Capital</item>
+        <item>Easyinvest</item>
+        <item>Elite</item>
+        <item>Fator</item>
+        <item>Genial</item>
+        <item>Guide</item>
+        <item>H.Commcor</item>
+        <item>MyCap</item>
+        <item>Banco Inter</item>
+        <item>Itaú</item>
+        <item>Mercantil</item>
+        <item>Mirae Asset</item>
+        <item>ModalMais</item>
+        <item>Necton</item>
+        <item>Nova Futura</item>
+        <item>Órama</item>
+        <item>Planner</item>
+        <item>Safra</item>
+        <item>Santander</item>
+        <item>Singulare</item>
+        <item>Terra Investimentos</item>
+        <item>Votorantim corretora</item>
+        <item>XP Investimentos</item>
+        <item>Rico</item>
+
+    </string-array>
 </resources>

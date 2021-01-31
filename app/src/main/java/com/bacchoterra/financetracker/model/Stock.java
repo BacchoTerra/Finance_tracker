@@ -16,6 +16,7 @@ public class Stock  implements Serializable {
 
     private String expectedTimeInvested; //optional
     private String techniqueUsed; //optional
+    private String corretora; //optional
 
     private long finalTimestamp; //mandatory after finished...null until finished
     private float finalPrice; //mandatory after finished...null until finished
@@ -146,5 +147,13 @@ public class Stock  implements Serializable {
 
     public void setTechniqueUsed(String techniqueUsed) {
         this.techniqueUsed = techniqueUsed;
+    }
+
+    public String getCorretora() {
+        return corretora;
+    }
+
+    public void setCorretora(String corretora) {
+        this.corretora = corretora;
     }
 }

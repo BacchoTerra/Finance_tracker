@@ -39,16 +39,25 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_app_bar_layout"
         tools:text="OIBR3" />
 
+    <TextView
+        android:id="@+id/activity_show_stock_txt_stock_corretora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="C6 bank"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_stock_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_stock_name" />
+
 
     <TextView
         android:id="@+id/activity_show_stock_txt_market_status"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:textAllCaps="true"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_stock_name"
-        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_stock_name"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_stock_corretora"
+        app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_stock_corretora"
         tools:text="@string/mercado_aberto" />
 
     <View
@@ -394,6 +403,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_min_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_min_day" />
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

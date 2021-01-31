@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
@@ -17,7 +16,6 @@ import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.model.StockInformation;
 import com.bacchoterra.financetracker.tools.FetchStockInformation;
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
@@ -31,6 +29,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     private ConstraintLayout rootLayout;
     private Toolbar toolbar;
     private TextView txtStockName;
+    private TextView txtStockCorretora;
     private TextView txtInitialDate;
     private TextView txtMarketStatus;
     private TextView txtAveragePrice;
@@ -78,6 +77,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         rootLayout = findViewById(R.id.activity_show_stock_root_layout);
         toolbar = findViewById(R.id.activity_show_stock_toolbar);
         txtStockName = findViewById(R.id.activity_show_stock_txt_stock_name);
+        txtStockCorretora = findViewById(R.id.activity_show_stock_txt_stock_corretora);
         txtInitialDate = findViewById(R.id.activity_show_stock_txt_first_date);
         txtMarketStatus = findViewById(R.id.activity_show_stock_txt_market_status);
         txtAveragePrice = findViewById(R.id.activity_show_stock_txt_average_price);
@@ -120,6 +120,12 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
         txtTotalSpent.setText(calculateTotalSpent());
+
+        if (stock.getCorretora() != null){
+            txtStockCorretora.setText(stock.getCorretora());
+        }else {
+            txtStockCorretora.setVisibility(View.GONE);
+        }
 
 
     }

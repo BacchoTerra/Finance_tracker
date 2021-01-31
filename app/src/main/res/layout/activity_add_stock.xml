@@ -36,185 +36,203 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_add_stock_appBarLayout">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/data"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/activity_add_stock_txtInitial_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/valor_da_a_o"
-                app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
-                app:layout_constraintStart_toEndOf="@+id/activity_add_stock_txt_date"
-                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txt_date" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txt_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/data"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="@string/quantidade"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtInitial_price" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txtInitial_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/valor_da_a_o"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
+                    app:layout_constraintStart_toEndOf="@+id/activity_add_stock_txt_date"
+                    app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txt_date" />
 
-            <com.santalu.maskara.widget.MaskEditText
-                android:id="@+id/activity_add_stock_edit_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="dd/mm/yyyyy"
-                android:inputType="number"
-                android:maxLength="10"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date"
-                app:mask="__/__/____"
-                tools:ignore="HardcodedText" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txt_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/quantidade"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/activity_add_stock_txtInitial_price" />
 
-            <EditText
-                android:id="@+id/activity_add_stock_edit_price"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="R$ : xxxx.xx"
-                android:inputType="numberDecimal"
-                android:maxLength="7"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtInitial_price"
-                tools:ignore="HardcodedText" />
+                <com.santalu.maskara.widget.MaskEditText
+                    android:id="@+id/activity_add_stock_edit_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="dd/mm/yyyyy"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_date"
+                    app:mask="__/__/____"
+                    tools:ignore="HardcodedText" />
 
-            <EditText
-                android:id="@+id/activity_add_stock_edit_quantity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="x"
-                android:inputType="number"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txt_quantity"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
-                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_edit_price"
-                tools:ignore="HardcodedText" />
+                <EditText
+                    android:id="@+id/activity_add_stock_edit_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="R$ : xxxx.xx"
+                    android:inputType="numberDecimal"
+                    android:maxLength="7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtInitial_price"
+                    tools:ignore="HardcodedText" />
 
-            <EditText
-                android:id="@+id/activity_add_stock_edit_stock_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:hint="BBDC4"
-                android:textAllCaps="true"
-                android:inputType="textPersonName"
-                android:maxLength="5"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@color/renda_variavel"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_edit_date"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_price"
-                tools:ignore="HardcodedText" />
+                <EditText
+                    android:id="@+id/activity_add_stock_edit_quantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="x"
+                    android:inputType="number"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txt_quantity"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
+                    app:layout_constraintTop_toTopOf="@+id/activity_add_stock_edit_price"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:text="@string/tecnica_utilizada_opcional"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_stock_name" />
+                <EditText
+                    android:id="@+id/activity_add_stock_edit_stock_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:hint="BBDC4"
+                    android:textAllCaps="true"
+                    android:inputType="textPersonName"
+                    android:maxLength="5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/renda_variavel"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_edit_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_price"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/tempo_esperado_de_investimento_opcional"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_technique" />
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/tecnica_utilizada_opcional"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_corretora" />
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:drawablePadding="4dp"
-                android:text="@string/o_que_s_o_os_itens_acima"
-                app:drawableEndCompat="@drawable/ic_baseline_help_outline_24"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_estimated_time" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tempo_esperado_de_investimento_opcional"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_technique" />
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_total_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total gasto:"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
-                app:layout_constraintTop_toTopOf="@+id/activity_add_stock_edit_stock_name" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txt_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="4dp"
+                    android:text="@string/o_que_s_o_os_itens_acima"
+                    app:drawableEndCompat="@drawable/ic_baseline_help_outline_24"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_estimated_time" />
 
-            <TextView
-                android:id="@+id/activity_add_stock_txt_total_price_result"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_total_price"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_total_price"
-                tools:text="R$: 45,45" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txt_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total gasto:"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_quantity"
+                    app:layout_constraintTop_toTopOf="@+id/activity_add_stock_edit_stock_name" />
 
-            <Button
-                android:id="@+id/activity_add_stock_btn_add"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/shape_btn_adicionar_acao"
-                android:text="@string/adicionar"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_help"
-                app:layout_constraintVertical_bias="0.3" />
+                <TextView
+                    android:id="@+id/activity_add_stock_txt_total_price_result"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txt_total_price"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_total_price"
+                    tools:text="R$: 45,45" />
 
-            <EditText
-                android:id="@+id/activity_add_stock_edit_technique"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
+                <Button
+                    android:id="@+id/activity_add_stock_btn_add"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/shape_btn_adicionar_acao"
+                    android:text="@string/adicionar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txt_help" />
 
-            <EditText
-                android:id="@+id/activity_add_stock_edit_estimated_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
+                <EditText
+                    android:id="@+id/activity_add_stock_edit_technique"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView7"
+                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+                <EditText
+                    android:id="@+id/activity_add_stock_edit_estimated_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/activity_add_stock_edit_corretora"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/corretora_opcional"
+                    android:completionThreshold="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/activity_add_stock_edit_stock_name"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_edit_stock_name" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
