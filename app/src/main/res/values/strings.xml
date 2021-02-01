@@ -87,6 +87,13 @@
     <string name="ativo_nao_encontrado">Ativo não encontrado</string>
     <string name="corretora_opcional">Corretora (Opcional)</string>
     <string name="vender">Vender</string>
+    <string name="valor_das_novas_a_es">Valor das novas ações</string>
+    <string name="quantidade_de_a_es">Quantidade de ações</string>
+    <string name="r_45_00">R$ 45.00</string>
+    <string name="_45">45</string>
+    <string name="_10">+ 10</string>
+    <string name="_50">+ 50</string>
+    <string name="_100">+ 100</string>
 
     <string-array name="correotoras">
         <item>Ágora</item>
@@ -122,4 +129,7 @@
         <item>Rico</item>
 
     </string-array>
+
+    <string name="no_expected_time">Tempo estimado não definido</string>
+    <string name="no_technique_used">Técnica de análise não definida</string>
 </resources>

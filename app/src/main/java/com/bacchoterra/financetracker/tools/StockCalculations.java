@@ -10,4 +10,10 @@ public class StockCalculations {
 
     }
 
+    public static float calculateNewAveragePrice(float oldPrice,int oldQuantity,int newQuantity,float newPrice){
+
+
+        return ((oldPrice * oldQuantity) + (newPrice * newQuantity)) / (oldQuantity + newQuantity);
+    }
+
 }

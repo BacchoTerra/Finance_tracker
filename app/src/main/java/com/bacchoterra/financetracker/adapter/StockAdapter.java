@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -106,8 +107,8 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         holder.txtDate.setText(getDate(stock));
         holder.txtQuantity.setText(String.valueOf(stock.getQuantity()));
 
-        String initialPrice = moneySymbol + String.valueOf(stock.getAveragePrice()).replace('.', ',');
-        String totalSpend = moneySymbol + String.valueOf(stock.getTotalSpent()).replace('.', ',');
+        String initialPrice = moneySymbol + new DecimalFormat("0.00").format(stock.getAveragePrice()).replace('.', ',');
+        String totalSpend = moneySymbol + new DecimalFormat("0.00").format(stock.getTotalSpent()).replace('.', ',');
 
         holder.txtInitialPrice.setText(initialPrice);
         holder.txtTotalSpent.setText(totalSpend);

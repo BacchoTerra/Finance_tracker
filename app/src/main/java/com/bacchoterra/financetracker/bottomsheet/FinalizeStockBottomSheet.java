@@ -136,12 +136,18 @@ public class FinalizeStockBottomSheet extends BottomSheetDialogFragment implemen
                         null, null, null);
             }
 
-            stock.setProfit(profit);
+            setFinishedValuesToStock(profit);
+
         } else {
             txtProfit.setText(null);
         }
 
 
+    }
+
+    private void setFinishedValuesToStock(float profit){
+        stock.setProfit(profit);
+        stock.setFinished(true);
     }
 
     @Override

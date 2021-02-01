@@ -867,22 +867,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                tools:text="Medias moveis 17,34"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_profit_mock" />
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_profit_mock"
+                app:layout_constraintTop_toBottomOf="@+id/view5"
+                tools:text="Medias moveis 17,34" />
 
             <TextView
                 android:id="@+id/activity_show_stock_txt_time_expected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_marginTop="16dp"
-                tools:text="6 meses"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_technique" />
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_technique"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_technique"
+                tools:text="6 meses" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/view_background"
+                app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_profit"
+                app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_profit_mock"
+                app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_profit_mock" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

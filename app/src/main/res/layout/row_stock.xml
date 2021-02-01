@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:text="@string/valor_inicial"
+                android:text="@string/preco_medio"
                 android:textColor="@color/light_text_color"
                 app:layout_constraintEnd_toStartOf="@+id/activity_add_stock_txt_quantity"
                 app:layout_constraintStart_toEndOf="@+id/row_stock_txt_sotck_name"
@@ -56,13 +56,14 @@
 
             <TextView
                 android:id="@+id/row_stock_txt_price"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/money_symbol"
                 android:textColor="@color/light_text_color"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/activity_add_stock_txtInitial_price"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_stock_txtInitial_price"
                 app:layout_constraintTop_toBottomOf="@+id/activity_add_stock_txtInitial_price"
                 tools:text="45,45" />

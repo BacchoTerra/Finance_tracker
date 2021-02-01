@@ -14,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
+import com.bacchoterra.financetracker.bottomsheet.IncreaseStockBottomSheet;
 import com.bacchoterra.financetracker.bottomsheet.FinalizeStockBottomSheet;
 import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.model.StockInformation;
-import com.bacchoterra.financetracker.repository.StockApi;
 import com.bacchoterra.financetracker.tools.DialogHelper;
 import com.bacchoterra.financetracker.tools.FetchStockInformation;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ShowStockActivity extends AppCompatActivity implements View.OnClickListener, FinalizeStockBottomSheet.OnFinalizeListener {
+public class ShowStockActivity extends AppCompatActivity implements View.OnClickListener, FinalizeStockBottomSheet.OnFinalizeListener, IncreaseStockBottomSheet.OnIncreaseListener {
 
     //Layout components
     private ConstraintLayout rootLayout;
@@ -75,6 +75,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     //Key for bottomSheet bundle
     public static final String BOTTOM_SHEET_ARGS_KEY = "btm_sheet_args_key";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,13 +140,13 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         if (!stock.getTechniqueUsed().isEmpty()) {
             txtTechnique.setText(stock.getTechniqueUsed());
         } else {
-            txtTechnique.setText(getString(R.string.item_nao_definido));
+            txtTechnique.setText(getString(R.string.no_technique_used));
         }
 
         if (!stock.getExpectedTimeInvested().isEmpty()) {
             txtExpectedTime.setText(stock.getExpectedTimeInvested());
         } else {
-            txtExpectedTime.setText(getString(R.string.item_nao_definido));
+            txtExpectedTime.setText(getString(R.string.no_expected_time));
         }
 
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
@@ -359,6 +360,14 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
             dialogHelper.showDialog();
+        }else if (id == btnAdd.getId()){
+
+            IncreaseStockBottomSheet increaseStockBottomSheet = new IncreaseStockBottomSheet();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(BOTTOM_SHEET_ARGS_KEY,stock);
+            increaseStockBottomSheet.setArguments(bundle);
+            increaseStockBottomSheet.show(getSupportFragmentManager(),null);
+
         }
 
 
@@ -374,6 +383,27 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         StocksActivity.option = StocksActivity.FINALIZE_STOCK;
         setResult(RESULT_OK, intent);
         finish();
+
+    }
+
+    @Override
+    public void onIncreased(Stock stock) {
+        this.stock = stock;
+
+        Intent intent = new Intent();
+        intent.putExtra(StocksActivity.SHOW_STOCK_KEY,stock);
+        StocksActivity.option = StocksActivity.INCREASE_STOCK;
+        setResult(RESULT_OK,intent);
+        updateNewValues(stock);
+
+    }
+
+    private void updateNewValues(Stock stock) {
+
+        txtTotalSpent.setText(String.valueOf(stock.getTotalSpent()));
+        txtAveragePrice.setText(String.valueOf(stock.getAveragePrice()));
+        txtQuantity.setText(String.valueOf(stock.getQuantity()));
+        txtProfit.setText(decimalFormat.format(calculateProfit(stock.getAveragePrice())));
 
     }
 }

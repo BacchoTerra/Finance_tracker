@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +54,7 @@ public class StocksActivity extends AppCompatActivity {
     public static int option;
     public static final int EXCLUDE_STOCK = 0;
     public static final int FINALIZE_STOCK = 1;
+    public static final int INCREASE_STOCK = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,6 +259,8 @@ public class StocksActivity extends AppCompatActivity {
             viewModel.update(stock);
         }else if (option == EXCLUDE_STOCK){
             viewModel.delete(stock);
+        }else if(option == INCREASE_STOCK){
+            viewModel.update(stock);
         }
 
         stockAdapter.notifyDataSetChanged();
