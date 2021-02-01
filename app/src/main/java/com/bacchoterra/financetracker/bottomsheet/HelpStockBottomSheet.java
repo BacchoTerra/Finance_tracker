@@ -38,8 +38,6 @@ public class HelpStockBottomSheet extends BottomSheetDialogFragment {
 
     }
 
-    ;
-
     private void chipGroupSelection() {
 
         chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {

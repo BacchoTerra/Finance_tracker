@@ -508,10 +508,10 @@
         tools:textColor="@color/profit_color" />
 
     <Button
-        android:id="@+id/activity_show_stock_btn_sell"
+        android:id="@+id/activity_show_stock_btn_exclude"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/vender"
+        android:text="@string/excluir"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
@@ -526,10 +526,10 @@
         android:text="@string/adicionar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_sell"
-        app:layout_constraintEnd_toStartOf="@+id/activity_show_stock_btn_sell"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_exclude"
+        app:layout_constraintEnd_toStartOf="@+id/activity_show_stock_btn_exclude"
         app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_sell" />
+        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_exclude" />
 
 
     <Button
@@ -539,10 +539,10 @@
         android:text="@string/finalizar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_sell"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_btn_exclude"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toEndOf="@+id/activity_show_stock_btn_sell"
-        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_sell" />
+        app:layout_constraintStart_toEndOf="@+id/activity_show_stock_btn_exclude"
+        app:layout_constraintTop_toTopOf="@+id/activity_show_stock_btn_exclude" />
 
     <ScrollView
         android:layout_width="0dp"

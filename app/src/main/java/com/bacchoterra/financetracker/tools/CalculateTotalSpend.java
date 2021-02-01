@@ -9,11 +9,9 @@ import java.text.DecimalFormat;
 
 public class CalculateTotalSpend {
 
-    private EditText editPrice;
-    private EditText editQuantity;
-    private TextView txtTotalPrice;
-    private float value1;
-    private float value2;
+    private final EditText editPrice;
+    private final EditText editQuantity;
+    private final TextView txtTotalPrice;
     private float totalSpend;
 
     //Float format
@@ -76,8 +74,8 @@ public class CalculateTotalSpend {
 
         if (!secondWritten.getText().toString().isEmpty() && textFromOwner.length() >0) {
 
-            value1 = Float.parseFloat(textFromOwner);
-            value2 = Float.parseFloat(secondWritten.getText().toString());
+            float value1 = Float.parseFloat(textFromOwner);
+            float value2 = Float.parseFloat(secondWritten.getText().toString());
 
             totalSpend = value1 * value2;
 

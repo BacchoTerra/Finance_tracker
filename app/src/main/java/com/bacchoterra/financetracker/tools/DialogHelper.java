@@ -20,7 +20,9 @@ public class DialogHelper {
 
     public DialogHelper(Context context) {
         this.context = context;
-        builder = new AlertDialog.Builder(context);
+        if (builder == null){
+            builder = new AlertDialog.Builder(context);
+        }
     }
 
     public void constructSimpleDialog(String title, String message, String positiveBtn, @Nullable String negativeBtn, boolean isCancellable,OnBtnClickedListener listener) {
@@ -50,7 +52,7 @@ public class DialogHelper {
         alertDialog = builder.create();
     }
 
-    public void constructSimpleDialog(int title, int message, int positiveBtn, @Nullable String negativeBtn, boolean isCancellable,OnBtnClickedListener listener) {
+    public void constructSimpleDialog(int title, int message, int positiveBtn, @Nullable Integer negativeBtn, boolean isCancellable,OnBtnClickedListener listener) {
 
         builder.setTitle(title);
         builder.setMessage(message);

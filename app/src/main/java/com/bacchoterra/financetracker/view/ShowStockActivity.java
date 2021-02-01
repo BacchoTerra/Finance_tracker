@@ -3,9 +3,9 @@ package com.bacchoterra.financetracker.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
+import com.bacchoterra.financetracker.bottomsheet.FinalizeStockBottomSheet;
 import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.model.StockInformation;
+import com.bacchoterra.financetracker.repository.StockApi;
+import com.bacchoterra.financetracker.tools.DialogHelper;
 import com.bacchoterra.financetracker.tools.FetchStockInformation;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ShowStockActivity extends AppCompatActivity implements View.OnClickListener {
+public class ShowStockActivity extends AppCompatActivity implements View.OnClickListener, FinalizeStockBottomSheet.OnFinalizeListener {
 
     //Layout components
     private ConstraintLayout rootLayout;
@@ -37,7 +40,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     private TextView txtExpectedTime;
     private TextView txtMarketStatus;
     private Button btnAdd;
-    private Button btnSell;
+    private Button btnExclude;
     private Button btnFinalize;
     private TextView txtAveragePrice;
     private TextView txtVariation;
@@ -66,11 +69,19 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     //REST
     public FetchStockInformation fetchStockInformation;
 
+    //Dialog and bottomsheet
+    private FinalizeStockBottomSheet finalizeStockBottomSheet;
+    private DialogHelper dialogHelper;
+
+    //Key for bottomSheet bundle
+    public static final String BOTTOM_SHEET_ARGS_KEY = "btm_sheet_args_key";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_stock);
         decimalFormat = new DecimalFormat("0.00");
+        dialogHelper = new DialogHelper(this);
         init();
         retrieveStock();
         bindStock();
@@ -86,8 +97,11 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         txtStockName = findViewById(R.id.activity_show_stock_txt_stock_name);
         txtStockCorretora = findViewById(R.id.activity_show_stock_txt_stock_corretora);
         btnAdd = findViewById(R.id.activity_show_stock_btn_add);
-        btnSell = findViewById(R.id.activity_show_stock_btn_sell);
+        btnAdd.setOnClickListener(this);
+        btnExclude = findViewById(R.id.activity_show_stock_btn_exclude);
+        btnExclude.setOnClickListener(this);
         btnFinalize = findViewById(R.id.activity_show_stock_btn_finalize);
+        btnFinalize.setOnClickListener(this);
         txtInitialDate = findViewById(R.id.activity_show_stock_txt_first_date);
         txtTechnique = findViewById(R.id.activity_show_stock_txt_technique);
         txtExpectedTime = findViewById(R.id.activity_show_stock_txt_time_expected);
@@ -122,24 +136,24 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         txtInitialDate.setText(parseDate());
         txtAveragePrice.setText(parseMoney(stock.getAveragePrice()));
 
-        if (!stock.getTechniqueUsed().isEmpty()){
+        if (!stock.getTechniqueUsed().isEmpty()) {
             txtTechnique.setText(stock.getTechniqueUsed());
-        }else {
+        } else {
             txtTechnique.setText(getString(R.string.item_nao_definido));
         }
 
-        if (!stock.getExpectedTimeInvested().isEmpty()){
+        if (!stock.getExpectedTimeInvested().isEmpty()) {
             txtExpectedTime.setText(stock.getExpectedTimeInvested());
-        }else {
+        } else {
             txtExpectedTime.setText(getString(R.string.item_nao_definido));
         }
 
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
         txtTotalSpent.setText(calculateTotalSpent());
 
-        if (stock.getCorretora() != null){
+        if (stock.getCorretora() != null) {
             txtStockCorretora.setText(stock.getCorretora());
-        }else {
+        } else {
             txtStockCorretora.setVisibility(View.GONE);
         }
 
@@ -170,7 +184,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private float calculateProfit(float currentPrice){
+    private float calculateProfit(float currentPrice) {
 
         return (currentPrice * stock.getQuantity()) - (stock.getAveragePrice() * stock.getQuantity());
 
@@ -309,14 +323,57 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
         int id = view.getId();
 
-        if (id == imageBack.getId()){
+        if (id == imageBack.getId()) {
 
             finish();
 
+        } else if (id == btnFinalize.getId()) {
+            if (finalizeStockBottomSheet == null) {
+                finalizeStockBottomSheet = new FinalizeStockBottomSheet();
+            }
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(BOTTOM_SHEET_ARGS_KEY, stock);
+            finalizeStockBottomSheet.setArguments(bundle);
+
+            finalizeStockBottomSheet.show(getSupportFragmentManager(), null);
+
+        } else if (id == btnExclude.getId()) {
+
+            dialogHelper.constructSimpleDialog(R.string.excluir_opera_o,
+                    R.string.delete_stock_dialog_message,
+                    R.string.excluir, R.string.cancelar,
+                    true,
+                    new DialogHelper.OnBtnClickedListener() {
+                        @Override
+                        public void onPositive() {
+                            Intent intent = new Intent();
+                            intent.putExtra(StocksActivity.SHOW_STOCK_KEY, stock);
+                            StocksActivity.option = StocksActivity.EXCLUDE_STOCK;
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onNegative() {
+
+                        }
+                    });
+            dialogHelper.showDialog();
         }
 
 
     }
 
 
+    @Override
+    public void onFinalize(Stock stock) {
+
+        this.stock = stock;
+        Intent intent = new Intent();
+        intent.putExtra(StocksActivity.SHOW_STOCK_KEY, stock);
+        StocksActivity.option = StocksActivity.FINALIZE_STOCK;
+        setResult(RESULT_OK, intent);
+        finish();
+
+    }
 }

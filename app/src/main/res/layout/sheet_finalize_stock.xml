@@ -25,7 +25,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/sheet_finalize_Stock_txtProfit"
+        android:id="@+id/sheet_finalize_Stock_txt_profit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -45,7 +45,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="@+id/sheet_finalize_Stock_inout_layout"
         app:layout_constraintStart_toStartOf="@+id/sheet_finalize_Stock_inout_layout"
-        app:layout_constraintTop_toBottomOf="@+id/sheet_finalize_Stock_txtProfit" />
+        app:layout_constraintTop_toBottomOf="@+id/sheet_finalize_Stock_txt_profit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

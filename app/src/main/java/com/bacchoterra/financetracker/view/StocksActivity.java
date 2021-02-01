@@ -253,17 +253,13 @@ public class StocksActivity extends AppCompatActivity {
     }
 
     public void handleResultForShowActivity(Intent data) {
+
         Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
 
-
-        switch (option) {
-            case FINALIZE_STOCK:
-                viewModel.update(stock);
-                break;
-            case EXCLUDE_STOCK:
-                viewModel.delete(stock);
-                break;
-
+        if (option == FINALIZE_STOCK){
+            viewModel.update(stock);
+        }else if (option == EXCLUDE_STOCK){
+            viewModel.delete(stock);
         }
 
         stockAdapter.notifyDataSetChanged();
