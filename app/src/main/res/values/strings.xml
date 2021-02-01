@@ -86,6 +86,7 @@
     <string name="erro_desconhecido">Erro desconhecido</string>
     <string name="ativo_nao_encontrado">Ativo não encontrado</string>
     <string name="corretora_opcional">Corretora (Opcional)</string>
+    <string name="vender">Vender</string>
 
     <string-array name="correotoras">
         <item>Ágora</item>

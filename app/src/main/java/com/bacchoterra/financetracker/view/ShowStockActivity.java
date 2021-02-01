@@ -1,14 +1,16 @@
 package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
@@ -27,11 +29,16 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     //Layout components
     private ConstraintLayout rootLayout;
-    private Toolbar toolbar;
+    private ImageView imageBack;
     private TextView txtStockName;
     private TextView txtStockCorretora;
     private TextView txtInitialDate;
+    private TextView txtTechnique;
+    private TextView txtExpectedTime;
     private TextView txtMarketStatus;
+    private Button btnAdd;
+    private Button btnSell;
+    private Button btnFinalize;
     private TextView txtAveragePrice;
     private TextView txtVariation;
     private TextView txtCurrentValue;
@@ -65,7 +72,6 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_show_stock);
         decimalFormat = new DecimalFormat("0.00");
         init();
-        initToolbar();
         retrieveStock();
         bindStock();
         checkMarketStatus();
@@ -75,10 +81,16 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     private void init() {
         rootLayout = findViewById(R.id.activity_show_stock_root_layout);
-        toolbar = findViewById(R.id.activity_show_stock_toolbar);
+        imageBack = findViewById(R.id.activity_show_stock_image_back);
+        imageBack.setOnClickListener(this);
         txtStockName = findViewById(R.id.activity_show_stock_txt_stock_name);
         txtStockCorretora = findViewById(R.id.activity_show_stock_txt_stock_corretora);
+        btnAdd = findViewById(R.id.activity_show_stock_btn_add);
+        btnSell = findViewById(R.id.activity_show_stock_btn_sell);
+        btnFinalize = findViewById(R.id.activity_show_stock_btn_finalize);
         txtInitialDate = findViewById(R.id.activity_show_stock_txt_first_date);
+        txtTechnique = findViewById(R.id.activity_show_stock_txt_technique);
+        txtExpectedTime = findViewById(R.id.activity_show_stock_txt_time_expected);
         txtMarketStatus = findViewById(R.id.activity_show_stock_txt_market_status);
         txtAveragePrice = findViewById(R.id.activity_show_stock_txt_average_price);
         txtVariation = findViewById(R.id.activity_show_stock_txt_total_variation);
@@ -98,14 +110,6 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void initToolbar() {
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     private void retrieveStock() {
 
         stock = (Stock) getIntent().getExtras().get(StocksActivity.SHOW_STOCK_KEY);
@@ -117,6 +121,18 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         txtStockName.setText(stock.getStockName());
         txtInitialDate.setText(parseDate());
         txtAveragePrice.setText(parseMoney(stock.getAveragePrice()));
+
+        if (!stock.getTechniqueUsed().isEmpty()){
+            txtTechnique.setText(stock.getTechniqueUsed());
+        }else {
+            txtTechnique.setText(getString(R.string.item_nao_definido));
+        }
+
+        if (!stock.getExpectedTimeInvested().isEmpty()){
+            txtExpectedTime.setText(stock.getExpectedTimeInvested());
+        }else {
+            txtExpectedTime.setText(getString(R.string.item_nao_definido));
+        }
 
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
         txtTotalSpent.setText(calculateTotalSpent());
@@ -140,10 +156,10 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
         if (hour >= 10 && hour <= 18 && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
             txtMarketStatus.setText(R.string.mercado_aberto);
-            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.profit_color, null));
+            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.opened_market_color, null));
         } else {
             txtMarketStatus.setText(R.string.mercado_fechado);
-            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.deficit_color, null));
+            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.close_market_color, null));
         }
 
     }
@@ -258,7 +274,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     private void showInternetSnackBar() {
 
-        Snackbar snackbar = Snackbar.make(toolbar, R.string.sem_internet, Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(rootLayout, R.string.sem_internet, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(R.string.tentar_novamente, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -292,6 +308,12 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
 
         int id = view.getId();
+
+        if (id == imageBack.getId()){
+
+            finish();
+
+        }
 
 
     }
