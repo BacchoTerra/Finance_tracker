@@ -132,6 +132,6 @@
 
     <string name="no_expected_time">Tempo estimado não definido</string>
     <string name="no_technique_used">Técnica de análise não definida</string>
-    <string name="papeis">Papeis</string>
+    <string name="papeis">Papéis</string>
     <string name="valor_medio">Valor médio</string>
 </resources>

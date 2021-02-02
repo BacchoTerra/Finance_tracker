@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/row_stock_closed_txt_initial_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/row_stock_closed_card"
+        tools:text="08" />
+
+    <TextView
+        android:id="@+id/row_stock_closed_txt_initial_month"
+        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/row_stock_closed_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_closed_txt_initial_day"
+        tools:text="Out" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/row_stock_closed_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="@dimen/card_default_elevation"
+        app:cardCornerRadius="@dimen/card_default_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/row_stock_closed_txt_initial_day"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row_stock_closed_layout_background"
+            android:layout_width="match_parent"
+            tools:background="@drawable/shape_gradient_card_profit"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".5" />
+
+
+            <TextView
+                android:id="@+id/row_stock_closed_txt_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/row_stock_closed_image_direction"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="3 papeis" />
+
+            <TextView
+                android:id="@+id/row_stock_closed_txt_corretora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/row_stock_closed_txt_stock_name"
+                app:layout_constraintTop_toBottomOf="@+id/row_stock_closed_txt_stock_name"
+                tools:text="C6 Bank" />
+
+            <TextView
+                android:id="@+id/row_stock_closed_txt_stock_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                tools:text="ITUB4"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/row_stock_closed_image_direction"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+            <TextView
+                android:id="@+id/row_stock_closed_txt_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto"
+                tools:text=" + R$ 455,45"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/row_stock_closed_txt_stock_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/row_stock_closed_txt_stock_name" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@string/lucro"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/row_stock_closed_txt_profit"
+                app:layout_constraintTop_toTopOf="@+id/row_stock_closed_txt_corretora" />
+
+            <ImageView
+                app:tint="@color/white"
+                android:id="@+id/row_stock_closed_image_direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/row_stock_closed_txt_quantity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/row_stock_closed_txt_quantity"
+                app:srcCompat="@drawable/ic_round_trending_up_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/light_text_color"
+        app:layout_constraintBottom_toTopOf="@+id/row_stock_closed_txt_final_day"
+        app:layout_constraintEnd_toEndOf="@+id/row_stock_closed_txt_initial_month"
+        app:layout_constraintStart_toStartOf="@+id/row_stock_closed_txt_initial_month"
+        app:layout_constraintTop_toBottomOf="@+id/row_stock_closed_txt_initial_month" />
+
+    <TextView
+        android:id="@+id/row_stock_closed_txt_final_month"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/row_stock_closed_card"
+        app:layout_constraintEnd_toStartOf="@+id/row_stock_closed_card"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Dez" />
+
+    <TextView
+        android:id="@+id/row_stock_closed_txt_final_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="16"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/row_stock_closed_txt_final_month"
+        app:layout_constraintEnd_toEndOf="@+id/row_stock_closed_txt_initial_day"
+        app:layout_constraintStart_toStartOf="@+id/row_stock_closed_txt_initial_day" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

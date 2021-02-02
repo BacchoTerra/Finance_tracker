@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -15,15 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.model.Stock;
-import com.google.android.material.card.MaterialCardView;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Random;
 
-public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> {
+public class StockAdapter extends ListAdapter<Stock, RecyclerView.ViewHolder> {
 
     //date format
     private final Calendar calendar;
@@ -33,7 +32,10 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     //Extras
     private final String moneySymbol;
-    private int adapterCount =0;
+
+    //ViewTypes
+    public static final int STOCK_OPENED = 0;
+    public static final int STOCK_CLOSED = 1;
 
     public static final DiffUtil.ItemCallback<Stock> DIFF_UTIL = new DiffUtil.ItemCallback<Stock>() {
         @Override
@@ -59,25 +61,55 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_stock, parent, false);
+        RecyclerView.ViewHolder holder;
 
-        return new MyViewHolder(itemLista);
+        switch (viewType) {
+            case STOCK_OPENED:
+                holder =  new MyViewHolderOpened(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_stock_opened, parent, false));
+                break;
+            case STOCK_CLOSED:
+                holder =  new MyViewHolderClosed(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_stock_closed, parent, false));
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + viewType);
+        }
+
+        return holder;
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         Stock stock = getItem(position);
 
-        bindStock(stock, holder);
-        changeCardColor(holder);
+        switch (holder.getItemViewType()){
+            case STOCK_OPENED:
 
+                MyViewHolderOpened oHolder = (MyViewHolderOpened) holder;
+                bindOpenedStock(stock,oHolder);
+                break;
+
+            case STOCK_CLOSED:
+                MyViewHolderClosed cHolder = (MyViewHolderClosed) holder;
+                bindClosedStock(stock,cHolder);
+
+
+
+        }
 
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+
+        return getItem(position).isFinished() ? STOCK_CLOSED : STOCK_OPENED;
+
+    }
+
+    public static class MyViewHolderOpened extends RecyclerView.ViewHolder {
 
         CardView cardView;
         TextView txtDay;
@@ -88,28 +120,62 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         TextView txtStockName;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolderOpened(@NonNull View itemView) {
             super(itemView);
 
-            cardView = itemView.findViewById(R.id.row_stock_card);
-            txtStockName = itemView.findViewById(R.id.row_stock_txt_stock_name);
-            txtDay = itemView.findViewById(R.id.row_stock_txt_day);
-            txtMonth = itemView.findViewById(R.id.row_stock_txt_month);
-            txtQuantity = itemView.findViewById(R.id.row_stock_txt_quantity);
-            txtCorretora = itemView.findViewById(R.id.row_stock_txt_corretora);
-            txtAveragePrice = itemView.findViewById(R.id.row_stock_txt_price);
+            cardView = itemView.findViewById(R.id.row_stock_opened_card);
+            txtStockName = itemView.findViewById(R.id.row_stock_opened_txt_stock_name);
+            txtDay = itemView.findViewById(R.id.row_stock_opened_txt_day);
+            txtMonth = itemView.findViewById(R.id.row_stock_opened_txt_month);
+            txtQuantity = itemView.findViewById(R.id.row_stock_opened_txt_quantity);
+            txtCorretora = itemView.findViewById(R.id.row_stock_opened_txt_corretora);
+            txtAveragePrice = itemView.findViewById(R.id.row_stock_opened_txt_price);
 
 
         }
     }
 
-    private void bindStock(Stock stock, StockAdapter.MyViewHolder holder) {
+    public static class MyViewHolderClosed extends RecyclerView.ViewHolder {
 
-        buildRow(holder, stock, stock.isFinished());
+        CardView cardView;
+        ConstraintLayout layoutBackground;
+        ImageView imageDirection;
+        TextView txtInitialDay;
+        TextView txtInitialMonth;
+        TextView txtFinalDay;
+        TextView txtFinalMonth;
+        TextView txtProfit;
+        TextView txtQuantity;
+        TextView txtCorretora;
+        TextView txtStockName;
+
+
+        public MyViewHolderClosed(@NonNull View itemView) {
+            super(itemView);
+
+            cardView = itemView.findViewById(R.id.row_stock_closed_card);
+            layoutBackground = itemView.findViewById(R.id.row_stock_closed_layout_background);
+            imageDirection = itemView.findViewById(R.id.row_stock_closed_image_direction);
+            txtStockName = itemView.findViewById(R.id.row_stock_closed_txt_stock_name);
+            txtInitialDay = itemView.findViewById(R.id.row_stock_closed_txt_initial_day);
+            txtInitialMonth = itemView.findViewById(R.id.row_stock_closed_txt_initial_month);
+            txtFinalDay = itemView.findViewById(R.id.row_stock_closed_txt_final_day);
+            txtFinalMonth = itemView.findViewById(R.id.row_stock_closed_txt_final_month);
+            txtQuantity = itemView.findViewById(R.id.row_stock_closed_txt_quantity);
+            txtCorretora = itemView.findViewById(R.id.row_stock_closed_txt_corretora);
+            txtProfit = itemView.findViewById(R.id.row_stock_closed_txt_profit);
+
+
+        }
+    }
+
+    private void bindOpenedStock(Stock stock, MyViewHolderOpened holder) {
+
+        buildOpenedRow(holder, stock);
 
     }
 
-    private void buildRow(MyViewHolder holder, Stock stock, boolean finished) {
+    private void buildOpenedRow(MyViewHolderOpened holder, Stock stock) {
 
         holder.txtStockName.setText(stock.getStockName());
         holder.txtCorretora.setText(stock.getCorretora());
@@ -121,15 +187,49 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
         String averagePrice = moneySymbol + new DecimalFormat("0.00").format(stock.getAveragePrice()).replace('.', ',');
 
         holder.txtAveragePrice.setText(averagePrice);
-        holder.txtDay.setText(getDay(stock));
-        holder.txtMonth.setText(getMonth(stock));
+        holder.txtDay.setText(getDay(stock.getInitialTimestamp()));
+        holder.txtMonth.setText(getMonth(stock.getInitialTimestamp()));
 
 
     }
 
-    private String getDay(Stock stock) {
+    private void bindClosedStock(Stock stock, MyViewHolderClosed holder) {
 
-        calendar.setTimeInMillis(stock.getInitialTimestamp());
+        buildClosedRow(holder, stock);
+
+    }
+
+    private void buildClosedRow(MyViewHolderClosed holder, Stock stock) {
+        holder.txtStockName.setText(stock.getStockName());
+        holder.txtCorretora.setText(stock.getCorretora());
+
+        String quantity = stock.getQuantity() + " " + activity.getString(R.string.papeis);
+
+        holder.txtQuantity.setText(quantity);
+
+        String averagePrice = moneySymbol + new DecimalFormat("0.00").format(stock.getProfit()).replace('.', ',');
+
+        holder.txtProfit.setText(averagePrice);
+        holder.txtInitialDay.setText(getDay(stock.getInitialTimestamp()));
+        holder.txtInitialMonth.setText(getMonth(stock.getInitialTimestamp()));
+        holder.txtFinalDay.setText(getDay(stock.getFinalTimestamp()));
+        holder.txtFinalMonth.setText(getMonth(stock.getFinalTimestamp()));
+
+
+        if (stock.getProfit() > 0){
+            holder.layoutBackground.setBackground(ResourcesCompat.getDrawable(activity.getResources(),R.drawable.shape_gradient_card_profit,null));
+            holder.imageDirection.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(),R.drawable.ic_round_trending_up_24,null));
+
+        }else {
+            holder.layoutBackground.setBackground(ResourcesCompat.getDrawable(activity.getResources(),R.drawable.shape_gradient_card_deficit,null));
+            holder.imageDirection.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(),R.drawable.ic_round_trending_down_24,null));
+        }
+
+    }
+
+    private String getDay(long timestamp) {
+
+        calendar.setTimeInMillis(timestamp);
 
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -141,26 +241,10 @@ public class StockAdapter extends ListAdapter<Stock, StockAdapter.MyViewHolder> 
 
     }
 
-    private String getMonth(Stock stock) {
-        calendar.setTimeInMillis(stock.getInitialTimestamp());
+    private String getMonth(long timestamp) {
+        calendar.setTimeInMillis(timestamp);
 
         return calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
-
-    }
-
-    private void changeCardColor(MyViewHolder holder) {
-
-        if (adapterCount == 0){
-            holder.cardView.setCardBackgroundColor(ResourcesCompat.getColor(activity.getResources(),R.color.card_row_stock_background_1,null));
-            adapterCount ++;
-        }else if (adapterCount == 1){
-            holder.cardView.setCardBackgroundColor(ResourcesCompat.getColor(activity.getResources(),R.color.card_row_stock_background_2,null));
-            adapterCount ++;
-        }else {
-            holder.cardView.setCardBackgroundColor(ResourcesCompat.getColor(activity.getResources(),R.color.card_row_stock_background_3,null));
-            adapterCount = 0;
-        }
-
 
     }
 

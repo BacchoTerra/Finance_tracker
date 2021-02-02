@@ -120,7 +120,7 @@
                     android:hint="BBDC4"
                     android:textAllCaps="true"
                     android:inputType="textPersonName"
-                    android:maxLength="5"
+                    android:maxLength="6"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/renda_variavel"
                     app:layout_constraintStart_toStartOf="@+id/activity_add_stock_edit_date"

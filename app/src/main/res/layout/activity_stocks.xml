@@ -10,6 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/activity_stock_appBarLayout"
         android:layout_width="match_parent"
+        app:elevation="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,7 +25,7 @@
                 android:id="@+id/activity_stock_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/toolbar_color"
+                android:background="@color/background_color"
                 app:menu="@menu/menu_toobar_search_icon"
                 app:title="@string/acoes"
                 app:titleTextColor="@color/toolbar_text_color" />
@@ -57,12 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_stock_appBarLayout"
-        tools:listitem="@layout/row_stock" />
+        tools:listitem="@layout/row_stock_opened" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_stock_fab_add"
