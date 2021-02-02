@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinanceTracker">
         <activity android:name=".view.ShowStockActivity"
-            android:parentActivityName=".view.StocksActivity"/>
+            android:parentActivityName=".view.StocksActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.AddStockActivity"
             android:parentActivityName=".view.StocksActivity" />

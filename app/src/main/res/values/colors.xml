@@ -30,4 +30,8 @@
     <color name="view_background">#F3F3F3</color>
     <color name="close_market_color">#FF4A4A</color>
     <color name="opened_market_color">#0f9c58</color>
+
+    <color name="card_row_stock_background_1">#14A2CF</color>
+    <color name="card_row_stock_background_2">#6192FB</color>
+    <color name="card_row_stock_background_3">#14CFBA</color>
 </resources>

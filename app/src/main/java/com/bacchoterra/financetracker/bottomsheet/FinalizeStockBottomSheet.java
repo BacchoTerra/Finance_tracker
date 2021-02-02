@@ -148,6 +148,7 @@ public class FinalizeStockBottomSheet extends BottomSheetDialogFragment implemen
     private void setFinishedValuesToStock(float profit){
         stock.setProfit(profit);
         stock.setFinished(true);
+        stock.setFinalTimestamp(System.currentTimeMillis());
     }
 
     @Override
