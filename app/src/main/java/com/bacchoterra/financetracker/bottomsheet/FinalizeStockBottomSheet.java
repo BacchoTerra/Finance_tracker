@@ -136,7 +136,7 @@ public class FinalizeStockBottomSheet extends BottomSheetDialogFragment implemen
                         null, null, null);
             }
 
-            setFinishedValuesToStock(profit);
+            setFinishedValuesToStock(profit,charSequence.toString());
 
         } else {
             txtProfit.setText(null);
@@ -145,10 +145,11 @@ public class FinalizeStockBottomSheet extends BottomSheetDialogFragment implemen
 
     }
 
-    private void setFinishedValuesToStock(float profit){
+    private void setFinishedValuesToStock(float profit,String finalPrice){
         stock.setProfit(profit);
         stock.setFinished(true);
         stock.setFinalTimestamp(System.currentTimeMillis());
+        stock.setFinalPrice(Float.parseFloat(finalPrice));
     }
 
     @Override

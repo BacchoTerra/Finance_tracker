@@ -41,7 +41,7 @@ public class SimpleRecyclerSwipe {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-                swipeListener.onSwiped(viewHolder.getAdapterPosition());
+                swipeListener.onSwiped(viewHolder.getAdapterPosition(),viewHolder);
 
 
             }
@@ -53,7 +53,7 @@ public class SimpleRecyclerSwipe {
 
     public interface SwipeListener {
 
-        public void onSwiped(int position);
+        public void onSwiped(int position, RecyclerView.ViewHolder viewHolder);
 
 
     }

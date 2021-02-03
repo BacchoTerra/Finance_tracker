@@ -49,6 +49,7 @@ public class StocksActivity extends AppCompatActivity {
     public static final int SHOW_STOCK_CODE = 200;
     public static final String ADD_STOCK_KEY = "add_stock_key";
     public static final String SHOW_STOCK_KEY = "show_stock_key";
+    public static final String SHOW_FINISHED_STOCK_KEY = "show_fin_stock_key";
 
     //ActivityResult switch statement
     public static int option;
@@ -140,11 +141,20 @@ public class StocksActivity extends AppCompatActivity {
 
         swipe.swipe(new SimpleRecyclerSwipe.SwipeListener() {
             @Override
-            public void onSwiped(int position) {
+            public void onSwiped(int position, RecyclerView.ViewHolder viewHolder) {
                 stockAdapter.notifyItemChanged(position);
-                Intent intent = new Intent(StocksActivity.this, ShowStockActivity.class);
-                intent.putExtra(SHOW_STOCK_KEY, stockAdapter.getStock(position));
-                startActivityForResult(intent, SHOW_STOCK_CODE);
+
+
+
+                if (viewHolder instanceof StockAdapter.MyViewHolderOpened){
+                    Intent intent = new Intent(StocksActivity.this, ShowStockActivity.class);
+                    intent.putExtra(SHOW_STOCK_KEY, stockAdapter.getStock(position));
+                    startActivityForResult(intent, SHOW_STOCK_CODE);
+                }else {
+                    Intent intent = new Intent(StocksActivity.this, ShowFinishedStockActivity.class);
+                    intent.putExtra(SHOW_FINISHED_STOCK_KEY,stockAdapter.getStock(position));
+                    startActivity(intent);
+                }
             }
         });
 

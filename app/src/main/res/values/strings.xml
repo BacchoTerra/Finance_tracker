@@ -135,4 +135,8 @@
     <string name="papeis">Papéis</string>
     <string name="valor_medio">Valor médio</string>
     <string name="atualixado_com_sucesso">Atualizado com sucesso</string>
+    <string name="lucro_total">Lucro total</string>
+    <string name="per_odo_de_investimento">Período de investimento</string>
+    <string name="pre_o_m_dio_e_quantidade">Preço médio e quantidade</string>
+    <string name="valor_total_de_investimento">Valor total de investimento</string>
 </resources>
