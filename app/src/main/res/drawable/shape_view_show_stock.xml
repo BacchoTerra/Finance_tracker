@@ -6,6 +6,6 @@
         android:bottomRightRadius="16dp"/>
 
     <solid
-        android:color="#404A4A"/>
+        android:color="@color/card_row_stock_background_1"/>
 
 </shape>

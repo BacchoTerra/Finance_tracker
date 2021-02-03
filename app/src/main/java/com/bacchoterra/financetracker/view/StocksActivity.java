@@ -261,6 +261,7 @@ public class StocksActivity extends AppCompatActivity {
             viewModel.delete(stock);
         }else if(option == INCREASE_STOCK){
             viewModel.update(stock);
+            Toast.makeText(this, getString(R.string.atualixado_com_sucesso), Toast.LENGTH_SHORT).show();
         }
 
         stockAdapter.notifyDataSetChanged();

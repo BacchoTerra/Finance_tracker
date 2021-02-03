@@ -36,13 +36,13 @@
     <ImageView
         android:id="@+id/activity_show_stock_image_back"
         android:layout_width="wrap_content"
-        app:tint="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_show_stock_txt_stock_name"
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toTopOf="@+id/activity_show_stock_txt_stock_name"
-        app:srcCompat="@drawable/ic_round_arrow_back_24" />
+        app:srcCompat="@drawable/ic_round_arrow_back_24"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/activity_show_stock_txt_stock_corretora"
@@ -92,12 +92,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_show_stock_txt_total_spent_mock"
         app:layout_constraintStart_toStartOf="@+id/activity_show_stock_txt_total_spent_mock"
         app:layout_constraintTop_toBottomOf="@+id/activity_show_stock_txt_total_spent"
-        tools:text="Mercado aberto"
-        tools:textColor="@color/profit_color" />
+        tools:text="Mercado aberto" />
 
     <Button
         android:id="@+id/activity_show_stock_btn_exclude"
@@ -157,12 +157,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/valor_m_dio_de_suas_a_es"
-                android:drawablePadding="8dp"
+                app:drawableEndCompat="@drawable/ic_baseline_help_outline_24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:drawableEndCompat="@drawable/ic_baseline_help_outline_24" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/activity_show_stock_txt_average_price"

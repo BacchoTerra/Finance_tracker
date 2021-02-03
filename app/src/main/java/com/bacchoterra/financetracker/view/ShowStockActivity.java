@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bacchoterra.financetracker.R;
 import com.bacchoterra.financetracker.bottomsheet.IncreaseStockBottomSheet;
@@ -68,6 +69,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
     //REST
     public FetchStockInformation fetchStockInformation;
+    private float currentStockValue;
 
     //Dialog and bottomsheet
     private FinalizeStockBottomSheet finalizeStockBottomSheet;
@@ -150,7 +152,7 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
         }
 
         txtQuantity.setText(String.valueOf(stock.getQuantity()));
-        txtTotalSpent.setText(calculateTotalSpent());
+        txtTotalSpent.setText(calculateTotalSpent(stock));
 
         if (stock.getCorretora() != null) {
             txtStockCorretora.setText(stock.getCorretora());
@@ -171,21 +173,19 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
 
         if (hour >= 10 && hour <= 18 && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
             txtMarketStatus.setText(R.string.mercado_aberto);
-            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.opened_market_color, null));
         } else {
             txtMarketStatus.setText(R.string.mercado_fechado);
-            txtMarketStatus.setTextColor(ResourcesCompat.getColor(getResources(), R.color.close_market_color, null));
         }
 
     }
 
-    private String calculateTotalSpent() {
+    private String calculateTotalSpent(Stock stock) {
 
         return getString(R.string.money_symbol) + " " + decimalFormat.format(stock.getAveragePrice() * stock.getQuantity());
 
     }
 
-    private float calculateProfit(float currentPrice) {
+    private float calculateProfit(Stock stock,float currentPrice) {
 
         return (currentPrice * stock.getQuantity()) - (stock.getAveragePrice() * stock.getQuantity());
 
@@ -247,21 +247,23 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     private void bindApiValues(StockInformation information) {
 
         if (information != null) {
-            float currentValue = information.getData().getValor();
+            currentStockValue = information.getData().getValor();
             float max = information.getData().getMaximo_dia();
             float min = information.getData().getMinimo_dia();
             float dayVariation = information.getData().getPorcentagem_variacao_dia();
 
-            txtCurrentValue.setText(getString(R.string.money_symbol) + " " + currentValue);
+            txtCurrentValue.setText(getString(R.string.money_symbol) + " " + currentStockValue);
             txtDayVariation.setText(dayVariation + " %");
             txtMaxDay.setText(getString(R.string.money_symbol) + " " + max);
             txtMinDay.setText(getString(R.string.money_symbol) + " " + min);
 
-            txtVariation.setText(decimalFormat.format(getTotalVariation(currentValue)) + " %");
+            txtVariation.setText(decimalFormat.format(getTotalVariation(currentStockValue)) + " %");
 
-            txtProfit.setText(decimalFormat.format(calculateProfit(information.getData().getValor())));
 
-            if (getTotalVariation(currentValue) > 0) {
+
+            txtProfit.setText(decimalFormat.format(calculateProfit(stock,information.getData().getValor())));
+
+            if (getTotalVariation(currentStockValue) > 0) {
                 txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.profit_color, null));
             } else {
                 txtVariation.setTextColor(ResourcesCompat.getColor(getResources(), R.color.deficit_color, null));
@@ -387,23 +389,14 @@ public class ShowStockActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void onIncreased(Stock stock) {
-        this.stock = stock;
+    public void onIncreased(Stock updatedStock) {
+        this.stock = updatedStock;
 
         Intent intent = new Intent();
-        intent.putExtra(StocksActivity.SHOW_STOCK_KEY,stock);
+        intent.putExtra(StocksActivity.SHOW_STOCK_KEY, updatedStock);
         StocksActivity.option = StocksActivity.INCREASE_STOCK;
         setResult(RESULT_OK,intent);
-        updateNewValues(stock);
-
-    }
-
-    private void updateNewValues(Stock stock) {
-
-        txtTotalSpent.setText(String.valueOf(stock.getTotalSpent()));
-        txtAveragePrice.setText(String.valueOf(stock.getAveragePrice()));
-        txtQuantity.setText(String.valueOf(stock.getQuantity()));
-        txtProfit.setText(decimalFormat.format(calculateProfit(stock.getAveragePrice())));
+        finish();
 
     }
 }

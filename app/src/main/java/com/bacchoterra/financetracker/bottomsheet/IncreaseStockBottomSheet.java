@@ -167,7 +167,7 @@ public class IncreaseStockBottomSheet extends BottomSheetDialogFragment implemen
 
     public interface OnIncreaseListener{
 
-        void onIncreased(Stock stock);
+        void onIncreased(Stock updatedStock);
 
     }
 }
