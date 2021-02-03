@@ -139,4 +139,6 @@
     <string name="per_odo_de_investimento">Período de investimento</string>
     <string name="pre_o_m_dio_e_quantidade">Preço médio e quantidade</string>
     <string name="valor_total_de_investimento">Valor total de investimento</string>
+    <string name="permanet_action">Esta ação não podera ser desfeita.</string>
+    <string name="item_excluido">Item excluído</string>
 </resources>

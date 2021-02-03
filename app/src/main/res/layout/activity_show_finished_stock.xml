@@ -129,8 +129,8 @@
                 android:id="@+id/view8"
                 android:layout_width="70dp"
                 android:layout_height="1dp"
-                android:background="@color/light_text_color"
                 android:layout_marginStart="16dp"
+                android:background="@color/light_text_color"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_show_fin_stock_txt_initial_date"
                 app:layout_constraintStart_toEndOf="@+id/activity_show_fin_stock_txt_initial_date"
                 app:layout_constraintTop_toTopOf="@+id/activity_show_fin_stock_txt_initial_date" />
@@ -166,11 +166,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                tools:text="R$ 10,00 (4)"
                 android:textColor="@color/light_text_color"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/activity_show_fin_stock_txt_initial_date"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                tools:text="R$ 10,00 (4)" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -188,11 +188,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
-                tools:text="R$ 40,00"
                 android:textColor="@color/light_text_color"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/activity_show_fin_stock_txt_price_quantity"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
+                tools:text="R$ 40,00" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -237,6 +237,18 @@
                 app:layout_constraintStart_toStartOf="@+id/activity_show_fin_stock_txt_technique_used"
                 app:layout_constraintTop_toBottomOf="@+id/textView21"
                 tools:text="8 Meses" />
+
+            <Button
+                android:id="@+id/activity_show_fin_stock_btn_exclude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/excluir_opera_o"
+                app:layout_constraintTop_toBottomOf="@id/activity_show_fin_stock_txt_estimated_time" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

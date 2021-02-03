@@ -50,6 +50,7 @@ public class StocksActivity extends AppCompatActivity {
     public static final String ADD_STOCK_KEY = "add_stock_key";
     public static final String SHOW_STOCK_KEY = "show_stock_key";
     public static final String SHOW_FINISHED_STOCK_KEY = "show_fin_stock_key";
+    public static final int SHOW_FINISHED_STOCK_CODE = 300;
 
     //ActivityResult switch statement
     public static int option;
@@ -153,7 +154,7 @@ public class StocksActivity extends AppCompatActivity {
                 }else {
                     Intent intent = new Intent(StocksActivity.this, ShowFinishedStockActivity.class);
                     intent.putExtra(SHOW_FINISHED_STOCK_KEY,stockAdapter.getStock(position));
-                    startActivity(intent);
+                    startActivityForResult(intent, SHOW_FINISHED_STOCK_CODE);
                 }
             }
         });
@@ -243,10 +244,11 @@ public class StocksActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        assert data != null && data.getExtras() != null;
+
         if (requestCode == ADD_STOCK_CODE && resultCode == RESULT_OK) {
 
 
-            assert data != null && data.getExtras() != null;
             Stock stock = (Stock) data.getExtras().get(ADD_STOCK_KEY);
             viewModel.insert(stock);
 
@@ -254,21 +256,24 @@ public class StocksActivity extends AppCompatActivity {
 
         if (requestCode == SHOW_STOCK_CODE && resultCode == RESULT_OK) {
 
-            assert data != null && data.getExtras() != null;
-            handleResultForShowActivity(data);
+
+            handleResultForShowActivity(data,SHOW_STOCK_KEY);
 
         }
 
+        if (requestCode == SHOW_FINISHED_STOCK_CODE && resultCode == RESULT_OK)
+            handleResultForShowActivity(data,SHOW_FINISHED_STOCK_KEY);
     }
 
-    public void handleResultForShowActivity(Intent data) {
+    public void handleResultForShowActivity(Intent data,String key) {
 
-        Stock stock = (Stock) data.getExtras().get(SHOW_STOCK_KEY);
+        Stock stock = (Stock) data.getExtras().get(key);
 
         if (option == FINALIZE_STOCK){
             viewModel.update(stock);
         }else if (option == EXCLUDE_STOCK){
             viewModel.delete(stock);
+            Toast.makeText(this, getString(R.string.item_excluido), Toast.LENGTH_SHORT).show();
         }else if(option == INCREASE_STOCK){
             viewModel.update(stock);
             Toast.makeText(this, getString(R.string.atualixado_com_sucesso), Toast.LENGTH_SHORT).show();

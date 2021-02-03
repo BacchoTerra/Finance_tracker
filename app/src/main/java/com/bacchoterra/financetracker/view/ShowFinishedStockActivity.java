@@ -2,18 +2,23 @@ package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bacchoterra.financetracker.R;
+import com.bacchoterra.financetracker.adapter.StockAdapter;
 import com.bacchoterra.financetracker.model.Stock;
+import com.bacchoterra.financetracker.tools.DialogHelper;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ShowFinishedStockActivity extends AppCompatActivity {
+public class ShowFinishedStockActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView imageBack;
     private TextView txtStockName;
@@ -25,12 +30,14 @@ public class ShowFinishedStockActivity extends AppCompatActivity {
     private TextView txtTotalSpent;
     private TextView txtTechnique;
     private TextView txtEstimatedTime;
+    private Button btnExclude;
 
     //Model
     private Stock stock;
 
     //Formatter
     private DecimalFormat decimalFormat;
+    DialogHelper dialogHelper;
 
 
     @Override
@@ -47,6 +54,7 @@ public class ShowFinishedStockActivity extends AppCompatActivity {
     private void init() {
 
         imageBack = findViewById(R.id.activity_show_fin_stock_image_back);
+        imageBack.setOnClickListener(this);
         txtStockName = findViewById(R.id.activity_show_fin_stock_txt_stock_name);
         txtCorretora = findViewById(R.id.activity_show_fin_stock_txt_corretora);
         txtProfit = findViewById(R.id.activity_show_fin_stock_txt_profit);
@@ -56,6 +64,8 @@ public class ShowFinishedStockActivity extends AppCompatActivity {
         txtTotalSpent = findViewById(R.id.activity_show_fin_stock_txt_total_spent);
         txtTechnique = findViewById(R.id.activity_show_fin_stock_txt_technique_used);
         txtEstimatedTime = findViewById(R.id.activity_show_fin_stock_txt_estimated_time);
+        btnExclude = findViewById(R.id.activity_show_fin_stock_btn_exclude);
+        btnExclude.setOnClickListener(this);
 
 
     }
@@ -124,6 +134,40 @@ public class ShowFinishedStockActivity extends AppCompatActivity {
 
         return sDay + "\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
 
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        int id = view.getId();
+
+        if (id == imageBack.getId()){
+            finish();
+        }else if (id == btnExclude.getId()){
+
+            if (dialogHelper == null){
+                dialogHelper =new DialogHelper(ShowFinishedStockActivity.this);
+            }
+
+            dialogHelper.constructSimpleDialog(R.string.excluir_opera_o, R.string.permanet_action, R.string.excluir, null, true, new DialogHelper.OnBtnClickedListener() {
+                @Override
+                public void onPositive() {
+                    Intent intent = new Intent();
+                    intent.putExtra(StocksActivity.SHOW_FINISHED_STOCK_KEY,stock);
+                    StocksActivity.option = StocksActivity.EXCLUDE_STOCK;
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
+
+                @Override
+                public void onNegative() {
+
+                }
+            });
+            dialogHelper.showDialog();
+
+        }
 
     }
 }
