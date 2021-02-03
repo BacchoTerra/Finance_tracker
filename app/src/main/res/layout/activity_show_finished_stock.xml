@@ -7,10 +7,10 @@
     tools:context=".view.ShowFinishedStockActivity">
 
     <View
-        android:id="@+id/view7"
+        android:id="@+id/activity_show_fin_stock_view_header"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:background="@drawable/shape_view_show_stock"
+        tools:background="@drawable/shape_header_view_deficit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/view7"
-        app:layout_constraintTop_toTopOf="@+id/view7"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_fin_stock_view_header"
+        app:layout_constraintTop_toTopOf="@+id/activity_show_fin_stock_view_header"
         app:srcCompat="@drawable/ic_round_arrow_back_24"
         app:tint="@color/white" />
 
@@ -34,10 +34,10 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_show_fin_stock_image_back"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_fin_stock_view_header"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toEndOf="@+id/activity_show_fin_stock_image_back"
-        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintStart_toStartOf="@+id/activity_show_fin_stock_view_header"
         app:layout_constraintTop_toTopOf="@+id/activity_show_fin_stock_image_back"
         app:layout_constraintVertical_bias="1.0"
         tools:text="gogl34" />
@@ -53,7 +53,7 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_show_fin_stock_txt_stock_name"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="@+id/activity_show_fin_stock_view_header"
         app:layout_constraintStart_toEndOf="@+id/activity_show_fin_stock_txt_stock_name"
         app:layout_constraintTop_toTopOf="@+id/activity_show_fin_stock_txt_stock_name"
         tools:text="Clear investimento" />
@@ -91,7 +91,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view7"
+        app:layout_constraintTop_toBottomOf="@id/activity_show_fin_stock_view_header"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,8 +102,8 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/per_odo_de_investimento"
                 android:textColor="@color/black"

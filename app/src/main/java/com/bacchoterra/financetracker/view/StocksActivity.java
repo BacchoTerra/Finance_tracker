@@ -244,11 +244,11 @@ public class StocksActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        assert data != null && data.getExtras() != null;
 
         if (requestCode == ADD_STOCK_CODE && resultCode == RESULT_OK) {
 
 
+            assert data != null && data.getExtras() != null;
             Stock stock = (Stock) data.getExtras().get(ADD_STOCK_KEY);
             viewModel.insert(stock);
 
@@ -256,13 +256,15 @@ public class StocksActivity extends AppCompatActivity {
 
         if (requestCode == SHOW_STOCK_CODE && resultCode == RESULT_OK) {
 
-
+            assert data != null && data.getExtras() != null;
             handleResultForShowActivity(data,SHOW_STOCK_KEY);
 
         }
 
-        if (requestCode == SHOW_FINISHED_STOCK_CODE && resultCode == RESULT_OK)
+        if (requestCode == SHOW_FINISHED_STOCK_CODE && resultCode == RESULT_OK){
+            assert data != null && data.getExtras() != null;
             handleResultForShowActivity(data,SHOW_FINISHED_STOCK_KEY);
+        }
     }
 
     public void handleResultForShowActivity(Intent data,String key) {

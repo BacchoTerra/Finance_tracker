@@ -1,6 +1,7 @@
 package com.bacchoterra.financetracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 public class ShowFinishedStockActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private View headerView;
     private ImageView imageBack;
     private TextView txtStockName;
     private TextView txtCorretora;
@@ -53,6 +55,7 @@ public class ShowFinishedStockActivity extends AppCompatActivity implements View
 
     private void init() {
 
+        headerView = findViewById(R.id.activity_show_fin_stock_view_header);
         imageBack = findViewById(R.id.activity_show_fin_stock_image_back);
         imageBack.setOnClickListener(this);
         txtStockName = findViewById(R.id.activity_show_fin_stock_txt_stock_name);
@@ -82,6 +85,12 @@ public class ShowFinishedStockActivity extends AppCompatActivity implements View
 
     private void bindStockValues() {
 
+        if (stock.getProfit() > 0){
+            headerView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.shape_header_view_profit,null));
+        }else {
+            headerView.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.shape_header_view_deficit,null));
+        }
+
         txtStockName.setText(stock.getStockName());
         if (stock.getCorretora() != null) {
             txtCorretora.setText(stock.getCorretora());
@@ -91,7 +100,7 @@ public class ShowFinishedStockActivity extends AppCompatActivity implements View
         txtFinalDate.setText(getFormattedDates(stock.getFinalTimestamp()));
 
         txtPriceQuantity.setText(getPriceQuantity());
-        txtTotalSpent.setText(decimalFormat.format(stock.getTotalSpent()));
+        txtTotalSpent.setText(getString(R.string.money_symbol) + " " + decimalFormat.format(stock.getTotalSpent()));
 
         if (!stock.getTechniqueUsed().isEmpty()) {
             txtTechnique.setText(stock.getTechniqueUsed());
@@ -109,7 +118,7 @@ public class ShowFinishedStockActivity extends AppCompatActivity implements View
 
     private String getPriceQuantity() {
 
-        return decimalFormat.format(stock.getAveragePrice()) + ' ' +
+        return getString(R.string.money_symbol) + " " + decimalFormat.format(stock.getAveragePrice()) + ' ' +
                 '(' +
                 stock.getQuantity() +
                 ')';
