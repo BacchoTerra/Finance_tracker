@@ -30,7 +30,8 @@ public class StockViewModel extends AndroidViewModel {
 
     public StockViewModel(@NonNull Application application) {
         super(application);
-        repository = new StockRepository(application);
+
+        repository = StockRepository.getInstance(application);
 
     }
 

@@ -13,6 +13,9 @@ import java.util.List;
 
 public class StockRepository {
 
+    //Instance for singleton repo;
+    private static StockRepository instance;
+
     //SQL options
     private static final int INSERT = 0;
     private static final int DELETE = 1;
@@ -25,10 +28,20 @@ public class StockRepository {
     public StockDao mDao;
     public LiveData<List<Stock>> allRendaVariavel;
 
-    public StockRepository(Application app) {
+    private StockRepository(Application app) {
 
         MyDatabase myDatabase = MyDatabase.getInstance(app);
         mDao = myDatabase.getRendaVariavelDao();
+    }
+
+    public static StockRepository getInstance(Application app){
+
+        if (instance == null){
+
+            instance = new StockRepository(app);
+
+        }
+        return instance;
     }
 
     public void insert(Stock stock){
