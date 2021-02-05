@@ -83,4 +83,16 @@ public class StockViewModel extends AndroidViewModel {
         return this.allStock;
 
     }
+
+    public LiveData<List<Float>> getAllAveragePrices(){
+
+        return repository.getAllAveragePrices();
+
+    }
+
+    public LiveData<List<Float>> getAllProfit(){
+
+        return repository.getAllProfit();
+
+    }
 }

@@ -135,10 +135,15 @@
     <string name="papeis">Papéis</string>
     <string name="valor_medio">Valor médio</string>
     <string name="atualixado_com_sucesso">Atualizado com sucesso</string>
-    <string name="lucro_total">Lucro total</string>
     <string name="per_odo_de_investimento">Período de investimento</string>
     <string name="pre_o_m_dio_e_quantidade">Preço médio e quantidade</string>
     <string name="valor_total_de_investimento">Valor total de investimento</string>
     <string name="permanet_action">Esta ação não podera ser desfeita.</string>
     <string name="item_excluido">Item excluído</string>
+    <string name="painel_de_controle">Painel de controle</string>
+    <string name="dinheiro_em_a_es">Dinheiro em ações</string>
+    <string name="lucro_total">Lucro total</string>
+    <string name="a_es_em_aberto">Ações em aberto</string>
+    <string name="ltima_a_o">Última ação</string>
+    <string name="ver_minhas_a_es">Ver minhas ações</string>
 </resources>

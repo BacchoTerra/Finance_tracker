@@ -27,6 +27,8 @@ public class StockRepository {
 
     public StockDao mDao;
     public LiveData<List<Stock>> allRendaVariavel;
+    public LiveData<List<Float>> allAveragePrices;
+    public LiveData<List<Float>> allProfit;
 
     private StockRepository(Application app) {
 
@@ -101,6 +103,22 @@ public class StockRepository {
         allRendaVariavel = mDao.selectAllFromRendaVariavelOrderByInitialPrice();
 
         return allRendaVariavel;
+    }
+
+    public LiveData<List<Float>>  getAllAveragePrices(){
+
+        allAveragePrices = mDao.selectAveragePrices();
+
+        return allAveragePrices;
+
+    }
+
+    public LiveData<List<Float>>  getAllProfit(){
+
+        allProfit = mDao.getAllProfit();
+
+        return allProfit;
+
     }
 
     public LiveData<List<Stock>>  getAllFromRendaVariavelOrderByName(String query){

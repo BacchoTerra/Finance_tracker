@@ -44,6 +44,12 @@ public interface StockDao {
     @Query("SELECT * FROM stock_table WHERE stockName LIKE :query")
     LiveData<List<Stock>> selectAllFromRendaVariavelByName(String query);
 
+    @Query("SELECT totalSpent FROM stock_table WHERE isFinished = 0")
+    LiveData<List<Float>> selectAveragePrices();
+
+    @Query("SELECT profit FROM stock_table WHERE isFinished = 1")
+    LiveData<List<Float>> getAllProfit();
+
 
 
 }
