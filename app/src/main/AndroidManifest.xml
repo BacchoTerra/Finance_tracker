@@ -12,18 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinanceTracker">
-        <activity android:name=".view.ShowFinishedStockActivity"></activity>
+        <activity android:name=".view.ShowFinishedStockActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.ShowStockActivity"
             android:parentActivityName=".view.StocksActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.AddStockActivity"
-            android:parentActivityName=".view.StocksActivity" />
+            android:parentActivityName=".view.StocksActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.StocksActivity"
-            android:parentActivityName=".view.MainActivity" />
-        <activity android:name=".view.MainActivity">
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

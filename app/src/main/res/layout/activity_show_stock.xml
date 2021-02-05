@@ -160,7 +160,6 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/valor_m_dio_de_suas_a_es"
-                app:drawableEndCompat="@drawable/ic_baseline_help_outline_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

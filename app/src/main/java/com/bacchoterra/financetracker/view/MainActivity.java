@@ -18,6 +18,7 @@ import com.bacchoterra.financetracker.model.Stock;
 import com.bacchoterra.financetracker.viewmodel.StockViewModel;
 import com.google.android.material.card.MaterialCardView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (float price : floats) {
 
                         totalSpent += price;
-                        txtTotalMoney.setText(getString(R.string.money_symbol) + " " + price);
+                        txtTotalMoney.setText(getString(R.string.money_symbol) + " " + new DecimalFormat("0.00").format(totalSpent));
 
                     }
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (float prof:floats){
 
                         profit +=prof;
-                        txtProfit.setText(getString(R.string.money_symbol) + " " + profit);
+                        txtProfit.setText(getString(R.string.money_symbol) + " " + new DecimalFormat("0.00").format(profit));
 
                     }
                 }else {
